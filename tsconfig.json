@@ -17,21 +17,17 @@
 		"plugins": [
 			{
 				"name": "next"
-			},
-			{
-				"name": "typescript-plugin-css-modules"
 			}
 		],
 		"baseUrl": "./src",
 		"paths": {
-			"@src/*": ["/*"],
-			"@ui/*": ["/shared/components/ui/*"],
-			"@hooks/*": ["/shared/hooks/*"],
-			"@shared/*": ["/shared/*"],
-			"@entities/*": ["/entities/*"],
-			"@features/*": ["/features/*"],
-			"@widgets/*": ["/widgets/*"],
-			"@application/*": ["/application/*"]
+			"@ui/*": ["shared/components/ui/*"],
+			"@hooks/*": ["shared/hooks/*"],
+			"@shared/*": ["shared/*"],
+			"@entities/*": ["entities/*"],
+			"@features/*": ["features/*"],
+			"@widgets/*": ["widgets/*"],
+			"@application/*": ["application/*"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
