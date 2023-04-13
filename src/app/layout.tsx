@@ -1,6 +1,8 @@
-import "./globals.css"
+import { CommonHead, store } from "application"
+import NextProgressBar from "application/components/NextProgressBar"
+import ReduxToast from "application/components/ReduxToast"
 import { Provider } from "react-redux"
-import { store } from "application"
+import "./globals.css"
 
 export const metadata = {
 	title: "Create Next App",
@@ -14,8 +16,13 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
+			<CommonHead />
 			<body>
-				<Provider store={store}>{children}</Provider>
+				<NextProgressBar />
+				<Provider store={store}>
+					<ReduxToast />
+					{children}
+				</Provider>
 			</body>
 		</html>
 	)
