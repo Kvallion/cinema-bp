@@ -1,0 +1,28 @@
+$blackout-color: #101215;
+
+@mixin fade-bg-gradient($direction: 90deg) {
+	&::before {
+		@apply absolute top-0 left-0 bottom-0 right-0 z-1;
+
+		background: linear-gradient(
+			$direction,
+			$blackout-color 3.31%,
+			rgba($blackout-color, 0.99) 7.71%,
+			rgba($blackout-color, 0.96) 12.11%,
+			rgba($blackout-color, 0.91) 16.51%,
+			rgba($blackout-color, 0.85) 20.91%,
+			rgba($blackout-color, 0.76) 25.31%,
+			rgba($blackout-color, 0.67) 29.71%,
+			rgba($blackout-color, 0.55) 34.11%,
+			rgba($blackout-color, 0.44) 38.52%,
+			rgba($blackout-color, 0.33) 42.92%,
+			rgba($blackout-color, 0.23) 47.32%,
+			rgba($blackout-color, 0.15) 51.72%,
+			rgba($blackout-color, 0.08) 56.12%,
+			rgba($blackout-color, 0.03) 60.52%,
+			rgba($blackout-color, 0.01) 64.92%,
+			rgba($blackout-color, 0) 69.32%
+		);
+		content: "";
+	}
+}
