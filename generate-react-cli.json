@@ -1,0 +1,7 @@
+{
+	"usesTypeScript": true,
+	"usesCssModule": true,
+	"cssPreprocessor": "scss",
+	"testLibrary": "Testing Library",
+	"component": {}
+}
