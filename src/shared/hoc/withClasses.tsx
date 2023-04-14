@@ -16,7 +16,7 @@ export function partialCn(_classes: string[]) {
 function withClasses<T extends WithClassesProps = WithClassesProps>(
 	Component: React.ComponentType<T>
 ) {
-	const ComponentWithClasses = ({ classes = [], ...props }) => {
+	const ComponentWithClasses = ({ classes = [] as string[], ...props }) => {
 		return <Component {...(props as T)} cn={partialCn(classes)} />
 	}
 	const displayName = Component.displayName || Component.name || "Component"

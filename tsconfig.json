@@ -25,9 +25,13 @@
 			"@hooks/*": ["shared/hooks/*"],
 			"@shared/*": ["shared/*"],
 			"@entities/*": ["entities/*"],
+			"@entities": ["entities"],
 			"@features/*": ["features/*"],
+			"@features": ["features"],
 			"@widgets/*": ["widgets/*"],
-			"@application/*": ["application/*"]
+			"@widgets": ["widgets"],
+			"@app/*": ["app/*"],
+			"@app": ["app"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
