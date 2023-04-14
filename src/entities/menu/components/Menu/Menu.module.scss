@@ -1,0 +1,10 @@
+.menu {
+	@apply mb-14 animate-fade;
+
+	.list {
+		@apply p-0;
+	}
+	.heading {
+		@apply pl-layout text-sm font-semibold uppercase text-gray-500;
+	}
+}

@@ -1,0 +1,48 @@
+.item {
+	@apply mt-6 border-r-4 border-r-transparent px-8 py-0 transition-colors;
+
+	&:hover {
+		.text {
+			@apply text-white;
+		}
+		.icon {
+			@apply fill-white;
+		}
+	}
+
+	&.active {
+		@apply border-r-primary;
+
+		.text {
+			@apply text-white;
+		}
+		.icon {
+			@apply fill-primary;
+		}
+	}
+}
+
+.list_btn {
+	@apply p-0;
+}
+
+.link {
+	@apply flex cursor-pointer items-center px-3;
+}
+
+.text {
+	@apply ml-3 text-lg text-gray-600;
+}
+
+.icon_wrapper {
+	min-width: initial;
+}
+
+.icon {
+	@apply text-2lg text-gray-600;
+}
+
+.text,
+.icon {
+	@apply transition-colors;
+}

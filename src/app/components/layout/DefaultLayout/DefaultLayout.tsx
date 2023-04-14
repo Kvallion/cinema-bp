@@ -1,6 +1,7 @@
 import { useAppDispatch } from "@hooks/redux"
+import { Navigation } from "@widgets/navigation"
 import { WithChildren } from "shared/types/utility/WithChildren"
-import { Navigation } from "../Navigation"
+
 import s from "./DefaultLayout.module.scss"
 
 const DefaultLayout: React.FC<WithChildren> = ({ children }) => {
@@ -8,8 +9,8 @@ const DefaultLayout: React.FC<WithChildren> = ({ children }) => {
 	return (
 		<div className={s.layout}>
 			<Navigation classes={[s.navigation]} />
+			{<main className={s.content}>{children}</main>}
 			{/* <Sidebar /> */}
-			{children}
 		</div>
 	)
 }

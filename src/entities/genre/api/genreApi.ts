@@ -6,8 +6,12 @@ export const genreApi = appApi.injectEndpoints({
 		getAllGenres: builder.query<Genre[], void>({
 			query: () => "/genres",
 		}),
+		getPopularGenres: builder.query<Genre[], void>({
+			query: () => "/genres",
+			transformResponse: (data: Genre[]) => data.slice(0, 10),
+		}),
 	}),
 })
 
-export const { useGetAllGenresQuery } = genreApi
-export const { getAllGenres } = genreApi.endpoints
+export const { useGetAllGenresQuery, useGetPopularGenresQuery } = genreApi
+export const { getAllGenres, getPopularGenres } = genreApi.endpoints

@@ -1,4 +1,6 @@
+import { appTheme } from "@app/model/theme"
 import { AppStore } from "@app/store/store"
+import { ThemeProvider } from "@mui/material/styles"
 import { Provider } from "react-redux"
 import { WithChildren } from "shared/types/utility/WithChildren"
 import NextProgressBar from "./NextProgressBar"
@@ -11,9 +13,11 @@ type MainProviderProps = WithChildren & {
 const MainProvider: React.FC<MainProviderProps> = ({ children, store }) => {
 	return (
 		<Provider store={store}>
-			<NextProgressBar />
-			<ReduxToast />
-			{children}
+			<ThemeProvider theme={appTheme}>
+				<NextProgressBar />
+				<ReduxToast />
+				{children}
+			</ThemeProvider>
 		</Provider>
 	)
 }

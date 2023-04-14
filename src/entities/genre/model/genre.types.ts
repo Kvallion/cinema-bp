@@ -3,5 +3,5 @@ export type Genre = {
 	name: string
 	slug: string
 	description: string
-	// icon: MaterialIconName
+	icon: string
 }
