@@ -4,7 +4,7 @@ const Favicons: React.FC = () => {
 			{/* https://iconifier.net/ */}
 			<link
 				rel="shortcut icon"
-				href="/favicons/favicon.ico"
+				href="/favicons/apple-touch-icon-57x57.png"
 				type="image/x-icon"
 			/>
 			<link

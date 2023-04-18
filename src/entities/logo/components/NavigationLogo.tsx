@@ -13,6 +13,7 @@ const NavigationLogo: React.FC<NavigationLogoProps> = () => {
 				width={247}
 				height={34}
 				draggable={false}
+				priority
 			/>
 		</Link>
 	)

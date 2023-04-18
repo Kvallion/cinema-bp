@@ -11,14 +11,6 @@
 	@apply sticky top-0 overflow-y-scroll hide-scroll;
 }
 
-.navigation {
-	@apply border-r border-r-gray-800 bg-gray-900;
-}
-
-.sidebar {
-	@apply border-l border-l-gray-800 bg-gray-900;
-}
-
 .content {
 	@apply min-h-screen p-layout;
 }

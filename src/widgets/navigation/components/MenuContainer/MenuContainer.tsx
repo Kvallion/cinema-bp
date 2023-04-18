@@ -1,8 +1,13 @@
 import { Menu } from "@entities/menu"
-import { AuthMenu } from "@features/auth-menu"
-import { GenreMenu } from "@features/genre-menu"
+import { GenreMenu } from "@features/GenreMenu"
 import { firstMenu } from "@widgets/navigation/model/data/menu-data"
+import dynamic from "next/dynamic"
 import s from "./MenuContainer.module.scss"
+
+const LazyAuthMenu = dynamic(
+	async () => (await import("@features/AuthMenu")).AuthMenu,
+	{ ssr: false }
+)
 
 type MenuContainerProps = {}
 
@@ -11,7 +16,7 @@ const MenuContainer: React.FC<MenuContainerProps> = () => {
 		<div>
 			<Menu {...firstMenu} />
 			<GenreMenu />
-			<AuthMenu />
+			<LazyAuthMenu />
 		</div>
 	)
 }

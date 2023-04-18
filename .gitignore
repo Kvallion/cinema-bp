@@ -2,6 +2,8 @@
 .env
 yarn.lock
 
+todo.txt
+
 # dependencies
 /node_modules
 /.pnp
