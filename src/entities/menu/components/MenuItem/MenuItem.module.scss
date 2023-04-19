@@ -1,5 +1,7 @@
 .item {
-	@apply mt-6 border-r-4 border-r-transparent px-8 py-0 transition-colors;
+	@apply border-r-4 border-r-transparent py-0 transition-colors;
+	padding-right: 2rem !important;
+	padding-left: 2rem !important;
 
 	&:hover {
 		.text {

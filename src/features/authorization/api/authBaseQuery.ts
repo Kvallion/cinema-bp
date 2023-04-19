@@ -10,7 +10,6 @@ import { TokensResponse } from "./responses.types"
 
 const baseQuery = fetchBaseQuery({
 	baseUrl: process.env.APP_SERVER_URL + "/api",
-	credentials: "include",
 	prepareHeaders(headers, { getState }) {
 		const token = selectAccessToken(getState() as RootState)
 		if (token) {

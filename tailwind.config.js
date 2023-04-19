@@ -136,7 +136,10 @@ module.exports = {
           "-ms-overflow-style": "none",
           "&::-webkit-scrollbar": {
             display: "none"
-          }
+          },
+        },
+        ".no-bg": {
+          background: "none!important",
         }
       });
 

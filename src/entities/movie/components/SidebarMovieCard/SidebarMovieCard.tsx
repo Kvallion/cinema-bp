@@ -7,6 +7,8 @@ import CardMedia from "@mui/material/CardMedia"
 import Typography from "@mui/material/Typography"
 import Image from "next/image"
 import { MaterialIcon } from "@entities/icon"
+import Link from "next/link"
+import { getMovieRoute } from "@shared/routes/routes"
 
 type SidebarMovieCardProps = Pick<
 	Movie,
@@ -22,16 +24,17 @@ const SidebarMovieCard: React.FC<SidebarMovieCardProps> = ({
 }) => {
 	return (
 		<Card component="li" className={s.card} elevation={0}>
-			<Image
-				className={s.poster}
-				src={poster}
-				alt={title + "poster"}
-				priority
-				width={65}
-				height={97}
-				draggable={false}
-			/>
-
+			<Link href={getMovieRoute(slug)}>
+				<Image
+					className={s.poster}
+					src={poster}
+					alt={title + "poster"}
+					priority
+					width={65}
+					height={97}
+					draggable={false}
+				/>
+			</Link>
 			<CardContent sx={{ flex: "1 0 auto" }} className={s.info}>
 				<Typography component="h4" variant="h5" className={s.title}>
 					{title}

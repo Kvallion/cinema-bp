@@ -1,5 +1,5 @@
 import { appApi } from "@shared/api/appApi"
-import { AuthCredentials } from "../model/auth.types"
+import { AuthCredentials } from "../model/types/auth.types"
 import { TokensResponse } from "./responses.types"
 
 export const authApi = appApi.injectEndpoints({
@@ -17,9 +17,6 @@ export const authApi = appApi.injectEndpoints({
 				method: "POST",
 				body: credentials,
 			}),
-			// transformResponse(tokens: RegisterResponse, meta, arg) {
-
-			// },
 		}),
 	}),
 })

@@ -9,6 +9,7 @@ type PrimaryButtonProps = ButtonProps & {
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
 	text,
 	wFull,
+	className,
 	...props
 }) => {
 	return (
@@ -16,7 +17,9 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
 			{...props}
 			variant="contained"
 			color="primary"
-			className={cn("btn-primary p-2.5", { ["w-full"]: wFull })}
+			className={cn("btn-primary p-2.5", className, {
+				["w-full"]: wFull,
+			})}
 		>
 			{text}
 		</Button>

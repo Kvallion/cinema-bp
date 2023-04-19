@@ -1,9 +1,16 @@
+import { useMemo } from "react"
 import { RootState } from "@app/store"
 import { User } from "@entities/user"
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import {
+	bindActionCreators,
+	createSlice,
+	PayloadAction,
+} from "@reduxjs/toolkit"
+import { useAppDispatch } from "@hooks/redux"
+import { AuthResonseUser } from "../api/responses.types"
 
 interface AuthSliceState {
-	user: User | null
+	user: AuthResonseUser | null
 	accessToken: string | null
 	refreshToken: string | null
 }
@@ -14,7 +21,7 @@ const initialState: AuthSliceState = {
 	user: null,
 }
 
-const authSlice = createSlice({
+export const AuthSlice = createSlice({
 	name: "auth",
 	initialState,
 	reducers: {
@@ -36,9 +43,13 @@ const authSlice = createSlice({
 	},
 })
 
-export const { logout, setCredentials } = authSlice.actions
-
-export const AuthReducer = authSlice.reducer
+export const useAuthActions = () => {
+	const dispatch = useAppDispatch()
+	return useMemo(
+		() => bindActionCreators(AuthSlice.actions, dispatch),
+		[dispatch]
+	)
+}
 
 export const selectAuthData = (state: RootState) => state.auth
 export const selectCurrentUser = (state: RootState) => state.auth.user

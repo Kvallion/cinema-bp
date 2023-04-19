@@ -4,7 +4,7 @@ import { wrapper } from "@app/store"
 import { AppProps } from "next/app"
 import { FC } from "react"
 import dynamic from "next/dynamic"
-import { RoleAccessConfig } from "@features/authorization/types/role-access"
+import { RoleAccessConfig } from "@features/authorization"
 
 const DynamicAccessCheckByRole = dynamic(
 	() =>

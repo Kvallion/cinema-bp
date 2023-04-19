@@ -1,5 +1,5 @@
 import { selectCurrentUser } from "@features/authorization/model/authSlice"
-import { RoleAccessConfig } from "@features/authorization/types/role-access"
+import { RoleAccessConfig } from "@features/authorization/model/types/role-access"
 import { useAppSelector } from "@hooks/redux"
 import { useRouter } from "next/router"
 

@@ -1,21 +1,22 @@
 import { Menu, MenuItem } from "@entities/menu"
+import { useAuthActions, useCurrentUser } from "@features/authorization"
 import { ADMIN, ROOT } from "@shared/routes/routes"
 
 type AuthMenuProps = {}
 
 const AuthMenu: React.FC<AuthMenuProps> = () => {
-	const isAuth = true
-	const isAdmin = true
+	const user = useCurrentUser()
+	const { logout } = useAuthActions()
 	return (
 		<Menu menuTitle="General">
-			{isAuth ? (
+			{user ? (
 				<>
 					<MenuItem
 						icon="MdAccountCircle"
 						link="/profile"
 						title="Profile"
 					/>
-					{isAdmin && (
+					{user.isAdmin && (
 						<MenuItem
 							icon="MdOutlineLock"
 							link={ADMIN}
@@ -23,7 +24,7 @@ const AuthMenu: React.FC<AuthMenuProps> = () => {
 						/>
 					)}
 					<MenuItem
-						onClick={() => {}}
+						onClick={logout}
 						title="Logout"
 						link={ROOT}
 						icon="MdLogout"

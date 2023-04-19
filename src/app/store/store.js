@@ -38,7 +38,7 @@ export const makeStore = ({ isServer }) => {
 
 		const persistConfig = {
 			key: 'nextjs',
-			whitelist: ['auth'],
+			whitelist: ['auth', "authForm"],
 			storage,
 		};
 

@@ -1,5 +1,6 @@
 .card {
 	@apply mb-4 flex items-stretch bg-transparent;
+	border-radius: 0 !important;
 
 	.poster {
 		@apply rounded-image border border-transparent transition-colors image-like-bg;

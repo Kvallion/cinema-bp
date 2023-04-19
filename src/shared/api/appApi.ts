@@ -1,4 +1,4 @@
-import { baseQueryWithReAuth } from "@features/authorization"
+import { baseQueryWithReAuth } from "@features/authorization/api/authBaseQuery"
 import { createApi } from "@reduxjs/toolkit/query/react"
 import { HYDRATE } from "next-redux-wrapper"
 

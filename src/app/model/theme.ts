@@ -26,13 +26,44 @@ export const appTheme = createTheme({
 		].join(","),
 	},
 	components: {
+		MuiListItem: {
+			styleOverrides: {
+				root: {
+					// padding: "0px",
+				},
+			},
+		},
+		MuiListItemButton: {
+			styleOverrides: {
+				root: {
+					padding: "0px",
+				},
+			},
+		},
+		MuiCardContent: {
+			styleOverrides: {
+				root: {
+					":last-child": {
+						paddingBottom: "0px",
+					},
+				},
+			},
+		},
+		MuiCard: {
+			defaultProps: {
+				classes: {
+					root: "no-bg",
+				},
+			},
+		},
 		MuiPaper: {
 			defaultProps: {
 				elevation: 0,
 			},
 			styleOverrides: {
 				root: {
-					bgColor: "transparent",
+					backgroundColor: "#101215",
+					borderRadius: "0.8rem",
 				},
 			},
 		},
@@ -40,7 +71,14 @@ export const appTheme = createTheme({
 			styleOverrides: {
 				containedPrimary: {
 					// bgColor: "palette.primary.main",
+					borderRadius: "0.65rem",
+					padding: "0.625rem 2.5rem",
 				},
+			},
+		},
+		MuiTextField: {
+			defaultProps: {
+				variant: "standard",
 			},
 		},
 	},
