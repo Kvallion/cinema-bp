@@ -1,12 +1,6 @@
-import cn from "clsx"
 import Link from "next/link"
 import { useRouter } from "next/router"
-
-import s from "./MenuItem.module.scss"
-import ListItem from "@mui/material/ListItem"
-import ListItemButton from "@mui/material/ListItemButton"
-import ListItemIcon from "@mui/material/ListItemIcon"
-import ListItemText from "@mui/material/ListItemText"
+import tw, { css, styled } from "twin.macro"
 import { MaterialIcon, MaterialIconName } from "@entities/icon"
 
 export type MenuItemProps = {
@@ -27,25 +21,49 @@ const MenuItem: React.FC<MenuItemProps> = ({
 	onClick,
 }) => {
 	const { asPath } = useRouter()
+	const active = !disableActive && asPath === link
 	return (
-		<ListItem
-			className={cn(s.item, className, {
-				[s.active]: !disableActive && asPath === link,
-			})}
-		>
-			<ListItemButton {...{ onClick }} className={s.list_btn}>
-				<Link href={link} className={s.link}>
-					<ListItemIcon className={s.icon_wrapper}>
-						<MaterialIcon name={icon} className={s.icon} />
-					</ListItemIcon>
-					<ListItemText
-						primary={title}
-						primaryTypographyProps={{ classes: { root: s.text } }}
-					/>
-				</Link>
-			</ListItemButton>
-		</ListItem>
+		<MItem active={active} className={className}>
+			<ListButton {...{ onClick }}>
+				<StyledLink href={link}>
+					<Icon name={icon} active={active} />
+					<Title active={active}>{title}</Title>
+				</StyledLink>
+			</ListButton>
+		</MItem>
 	)
 }
+
+const ListButton = tw.button`
+  
+`
+
+const StyledLink = tw(Link)`
+	flex cursor-pointer items-center px-3 text-gray-600
+`
+
+type IconProps = { active: boolean }
+const Icon = styled(MaterialIcon)<IconProps>(({ active }) => [
+	tw`text-2lg text-gray-600 transition-colors`,
+	active && tw`fill-primary`,
+])
+
+const Title = styled.span<{ active: boolean }>(({ active }) => [
+	tw`ml-3 text-lg transition-colors`,
+	active && tw`text-white`,
+])
+
+const MItem = styled.li<{ active: boolean }>(({ active }) => [
+	tw`mt-6 border-r-4 border-r-transparent px-8 transition-colors`,
+	css`
+		&:hover ${Title} {
+			${tw`text-white`}
+		}
+		&:hover ${Icon} {
+			${!active && tw`fill-white`}
+		}
+	`,
+	active && tw`border-r-primary`,
+])
 
 export { MenuItem }

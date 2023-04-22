@@ -43,6 +43,8 @@ export const AuthSlice = createSlice({
 	},
 })
 
+export const { logout, setCredentials } = AuthSlice.actions
+
 export const useAuthActions = () => {
 	const dispatch = useAppDispatch()
 	return useMemo(

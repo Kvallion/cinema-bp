@@ -1,8 +1,8 @@
-import { SidebarMovieList } from "@entities/movie"
 import { FAVORITES } from "@shared/routes/routes"
-import { PrimaryButton } from "@ui/PrimaryButton"
 import Link from "next/link"
 import s from "./SidebarFavorites.module.scss"
+import { Button } from "@ui/Button"
+import { SidebarMovieList } from "@entities/movie"
 
 type SidebarFavoritesProps = {}
 
@@ -12,7 +12,7 @@ const SidebarFavorites: React.FC<SidebarFavoritesProps> = () => {
 		<div>
 			{/* <SidebarMovieList title="Favorite movies" movies={movies || []} /> */}
 			<Link href={FAVORITES}>
-				<PrimaryButton text="See more" wFull />
+				<Button text="See more" wFull />
 			</Link>
 		</div>
 	)

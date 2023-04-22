@@ -1,1 +1,1 @@
-export { Search } from "./components/Search"
+export * from "./components/SearchField"

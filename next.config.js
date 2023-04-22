@@ -1,5 +1,8 @@
+const withTwin = require('./withTwin')
+
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = withTwin({
   poweredByHeader: false,
   optimizeFonts: false,
   env: {
@@ -19,6 +22,5 @@ const nextConfig = {
       },
     ]
   }
-}
+})
 
-module.exports = nextConfig

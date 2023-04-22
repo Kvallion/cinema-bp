@@ -1,11 +1,9 @@
-import { appTheme } from "@app/model/theme"
-import { AppStore } from "@app/store"
-import { ThemeProvider } from "@mui/material/styles"
+import NextProgressBar from "./NextProgressBar"
+import ReduxToast from "./ReduxToast"
 import { Provider } from "react-redux"
 import { PersistGate } from "redux-persist/integration/react"
 import { WithChildren } from "shared/types/utility/WithChildren"
-import NextProgressBar from "./NextProgressBar"
-import ReduxToast from "./ReduxToast"
+import { AppStore } from "@app/store"
 
 type MainProviderProps = WithChildren & {
 	store: AppStore
@@ -18,11 +16,9 @@ const MainProvider: React.FC<MainProviderProps> = ({ children, store }) => {
 				persistor={(store as any).__persistor}
 				loading={<div>Loading</div>}
 			>
-				<ThemeProvider theme={appTheme}>
-					<NextProgressBar />
-					<ReduxToast />
-					{children}
-				</ThemeProvider>
+				<NextProgressBar />
+				<ReduxToast />
+				{children}
 			</PersistGate>
 		</Provider>
 	)

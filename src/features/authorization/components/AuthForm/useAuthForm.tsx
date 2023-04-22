@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react"
+import { SubmitHandler, useForm } from "react-hook-form"
+import { useDebouncedCallback } from "use-debounce"
 import {
 	useLoginMutation,
 	useRegisterMutation,
@@ -10,9 +13,6 @@ import {
 import { useAuthActions } from "@features/authorization/model/authSlice"
 import { AuthForm } from "@features/authorization/model/types/auth.types"
 import { useAppSelector } from "@hooks/redux"
-import { useEffect, useState } from "react"
-import { SubmitHandler, useForm } from "react-hook-form"
-import { useDebouncedCallback } from "use-debounce"
 
 export default function useAuthForm() {
 	const [type, setType] = useState<"register" | "login">("login")
@@ -21,7 +21,7 @@ export default function useAuthForm() {
 	const {
 		register: regInput,
 		handleSubmit,
-		formState: { errors },
+		formState: { errors, dirtyFields },
 		watch,
 		reset,
 	} = useForm<AuthForm>({
@@ -59,10 +59,16 @@ export default function useAuthForm() {
 		reset()
 	}
 
+	const doFieldsHaveContent: typeof dirtyFields = {
+		email: dirtyFields.email || !!defaultValues.email,
+		password: dirtyFields.password || !!defaultValues.password,
+	}
+	console.log(dirtyFields)
 	return {
 		type,
 		regInput,
 		onSubmit: handleSubmit(onSubmit),
+		doFieldsHaveContent,
 		errors,
 		switchType: () => setType(type === "login" ? "register" : "login"),
 		clear: clearForm,

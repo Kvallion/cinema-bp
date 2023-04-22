@@ -1,10 +1,11 @@
-import withClasses, { WithClassesInjectionProps } from "@shared/hoc/withClasses"
-import s from "./{{TemplateName}}.module.scss"
+import tw, { styled } from "twin.macro"
 
-type {{TemplateName}}Props = WithClassesInjectionProps & {}
-
-const {{TemplateName}}: React.FC<{{TemplateName}}Props> = ({cn}) => {
-	return <div className={cn()}>{{TemplateName}}</div>
+type {{TemplateName}}Props = {
+	className?: string
 }
 
-export default withClasses({{TemplateName}})  
+const {{TemplateName}}: React.FC<{{TemplateName}}Props> = ({className}) => {
+	return <div className={className}>{{TemplateName}}</div>
+}
+
+export default {{TemplateName}}

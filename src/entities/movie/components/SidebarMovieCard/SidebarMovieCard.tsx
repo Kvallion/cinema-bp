@@ -1,14 +1,9 @@
-import { Movie } from "@entities/movie/model/movie.types"
-import s from "./SidebarMovieCard.module.scss"
-import Box from "@mui/material/Box"
-import Card from "@mui/material/Card"
-import CardContent from "@mui/material/CardContent"
-import CardMedia from "@mui/material/CardMedia"
-import Typography from "@mui/material/Typography"
-import Image from "next/image"
-import { MaterialIcon } from "@entities/icon"
-import Link from "next/link"
 import { getMovieRoute } from "@shared/routes/routes"
+import Image from "next/image"
+import Link from "next/link"
+import tw, { css, styled } from "twin.macro"
+import { Movie } from "@entities/movie/model/movie.types"
+import { MaterialIcon } from "@entities/icon"
 
 type SidebarMovieCardProps = Pick<
 	Movie,
@@ -23,10 +18,9 @@ const SidebarMovieCard: React.FC<SidebarMovieCardProps> = ({
 	poster,
 }) => {
 	return (
-		<Card component="li" className={s.card} elevation={0}>
+		<Card>
 			<Link href={getMovieRoute(slug)}>
-				<Image
-					className={s.poster}
+				<Poster
 					src={poster}
 					alt={title + "poster"}
 					priority
@@ -35,30 +29,48 @@ const SidebarMovieCard: React.FC<SidebarMovieCardProps> = ({
 					draggable={false}
 				/>
 			</Link>
-			<CardContent sx={{ flex: "1 0 auto" }} className={s.info}>
-				<Typography component="h4" variant="h5" className={s.title}>
-					{title}
-				</Typography>
-				<Typography
-					component="span"
-					variant="body2"
-					className={s.genres}
-				>
+			<Info>
+				<Title>{title}</Title>
+				<Genres>
 					{genres
 						.slice(0, 4)
-						.map((g) => g.name)
+						.map(g => g.name)
 						.join(", ")}
 					{genres.length > 4 && "..."}
-				</Typography>
-				<div className={s.rating}>
-					<MaterialIcon name="MdStar" className={s.star} />
-					<Typography component="span" variant="body2">
-						{rating}
-					</Typography>
-				</div>
-			</CardContent>
+				</Genres>
+				<Rating>
+					<Star />
+					<RatingValue>{rating}</RatingValue>
+				</Rating>
+			</Info>
 		</Card>
 	)
 }
+
+const Poster = styled(Image)`
+	rounded-image border border-transparent transition-colors image-like-bg
+`
+
+const Info = tw.div`w-2/3 ml-4 flex flex-col`
+
+const Title = tw.h5`truncate text-lg font-medium text-white`
+
+const Genres = tw.span`text-sm text-gray-600`
+
+const Rating = tw.div`mb-2 flex items-center justify-self-end`
+
+const RatingValue = tw.span``
+
+const Star = tw(MaterialIcon)`mr-2 fill-yellow-700 text-lg`
+Star.defaultProps = { name: "MdStar" }
+
+const Card = styled.div(() => [
+	tw`flex items-stretch`,
+	css`
+		&:hover ${Poster} {
+			${tw`border-primary`}
+		}
+	`,
+])
 
 export { SidebarMovieCard }

@@ -1,9 +1,9 @@
+import { AppProps } from "next/app"
+import dynamic from "next/dynamic"
+import { FC } from "react"
 import "@app/styles/globals.scss"
 import { DefaultLayout, MainProvider } from "@app/components"
 import { wrapper } from "@app/store"
-import { AppProps } from "next/app"
-import { FC } from "react"
-import dynamic from "next/dynamic"
 import { RoleAccessConfig } from "@features/authorization"
 
 const DynamicAccessCheckByRole = dynamic(

@@ -1,7 +1,7 @@
-import { ComponentProps } from "react"
 import withClasses, { WithClassesInjectionProps } from "@shared/hoc/withClasses"
 import Link from "next/link"
-import s from "./LinkText.module.scss"
+import { ComponentProps } from "react"
+import tw, { styled } from "twin.macro"
 
 type LinkTextOwnProps = WithClassesInjectionProps & {
 	href?: string
@@ -20,18 +20,20 @@ const LinkText: React.FC<LinkTextProps> = ({
 	...props
 }) => {
 	return (
-		<Link
+		<StyledLink
 			{...props}
 			href={href || ""}
-			onClick={(e) => {
+			onClick={e => {
 				if (!href) e.preventDefault()
 				if (onClick) onClick(e)
 			}}
-			className={cn(s.link, className)}
+			className={className}
 		>
 			{text}
-		</Link>
+		</StyledLink>
 	)
 }
+
+const StyledLink = styled(Link)(() => tw`text-sm text-gray-600 underline`)
 
 export default withClasses(LinkText)

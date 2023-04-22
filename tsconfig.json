@@ -41,5 +41,6 @@
 		".next/types/**/*.ts",
 		"src/app/store/store.js"
 	],
-	"exclude": ["node_modules", "templates"]
+	"exclude": ["node_modules", "templates"],
+	"types": ["types"]
 }

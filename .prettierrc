@@ -1,8 +1,45 @@
 {
 	"trailingComma": "es5",
+	"arrowParens": "avoid",
 	"tabWidth": 4,
 	"useTabs": true,
 	"semi": false,
 	"singleQuote": false,
-	"order": "concentric-css"
+	"order": "concentric-css",
+	"importOrder": [
+		"<THIRD_PARTY_MODULES>",
+
+		"^(.*)api(.*)",
+
+		"^(.*)model(.*)",
+
+		"^(.*)hooks(.*)",
+		"^(.*)/use(.*)",
+
+		"^(.*)helpers(.*)$",
+		"^(.*)utils(.*)$",
+		"^(.*)lib(.*)$",
+
+		"^(.*)consts(.*)$",
+
+		"^(.*)config(.*)$",
+
+		"^(.*)styles(.*)$",
+		"^(.*)[.]scss$",
+		"^(.*)[.]css$",
+
+		"^@widgets/(.*)components(.*)$",
+		"^@features/(.*)components(.*)$",
+		"^@entities/(.*)components(.*)$",
+		"^@shared/(.*)components(.*)$",
+		"^@ui/(.*)$",
+		"^(.*)[.]tsx$",
+
+		"^@app/(.*)$",
+		"^@widgets/(.*)$",
+		"^@features/(.*)$",
+		"^@entities/(.*)$"
+	],
+	"importOrderSeparation": false,
+	"importOrderSortSpecifiers": true
 }

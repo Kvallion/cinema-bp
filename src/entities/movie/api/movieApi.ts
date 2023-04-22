@@ -5,8 +5,11 @@ import { Movie } from "../model/movie.types"
 
 const movieApi = appApi.injectEndpoints({
 	endpoints: (build) => ({
-		getAllMovies: build.query<Movie[], void>({
-			query: () => "/movies",
+		getAllMovies: build.query<Movie[], string | undefined>({
+			query: (searchTerm?) => ({
+				url: "/movies",
+				params: { searchTerm },
+			}),
 		}),
 		getPopularMovies: build.query<Movie[], void>({
 			query: () => "/movies/most-popular",

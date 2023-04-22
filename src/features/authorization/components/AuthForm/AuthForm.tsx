@@ -1,17 +1,16 @@
+import tw, { styled } from "twin.macro"
+import { useAuthRedirect } from "@features/authorization/hooks/useAuthRedirect"
+import useAuthForm from "./useAuthForm"
 import {
 	emailFieldConfig,
 	passwordFieldConfig,
 } from "@features/authorization/config/AuthFormConfig"
-import TextField from "@mui/material/TextField"
-import Stack from "@mui/material/Stack"
-import Paper from "@mui/material/Paper"
-import useAuthForm from "./useAuthForm"
-import { PrimaryButton } from "@ui/PrimaryButton"
+import { Stack } from "@shared/components/Stack"
+import { Button } from "@ui/Button"
 import { Heading1 } from "@ui/Heading1"
-
-import s from "./AuthForm.module.scss"
 import LinkText from "@ui/LinkText/LinkText"
-import { useAuthRedirect } from "@features/authorization/hooks/useAuthRedirect"
+import { Paper } from "@ui/Paper"
+import { TextField } from "@ui/TextField"
 
 type AuthFormProps = {}
 
@@ -19,22 +18,22 @@ const AuthForm: React.FC<AuthFormProps> = () => {
 	useAuthRedirect()
 	const form = useAuthForm()
 	return (
-		<Paper className={s.root}>
+		<AirBlock>
 			<form onSubmit={form.onSubmit}>
-				<Stack spacing={2}>
+				<Stack spacing={4} className="mb-4">
 					<Heading1 text="Authorization" />
 					<TextField
 						label="Email"
+						labelLifted={form.doFieldsHaveContent.email}
 						{...form.regInput("email", emailFieldConfig)}
-						error={!!form.errors.email}
-						helperText={form.errors.email?.message}
+						error={form.errors.email}
 					/>
 					<TextField
-						label="Password"
 						type="password"
+						label="Password"
+						labelLifted={form.doFieldsHaveContent.password}
 						{...form.regInput("password", passwordFieldConfig)}
-						error={!!form.errors.password}
-						helperText={form.errors.password?.message}
+						error={form.errors.password}
 					/>
 
 					<LinkText
@@ -43,19 +42,21 @@ const AuthForm: React.FC<AuthFormProps> = () => {
 								? "Don't have an account? Sign up."
 								: "Do you have account already? Sign in."
 						}
-						classes={[s.link]}
+						tw="self-start"
 						onClick={form.switchType}
 					/>
 				</Stack>
 
-				<PrimaryButton
+				<Button
 					type="submit"
-					sx={{ mt: 2, display: "block" }}
+					tw="mt-2 block"
 					text={form.type === "login" ? "Sign in" : "Sign up"}
 				/>
 			</form>
-		</Paper>
+		</AirBlock>
 	)
 }
+
+const AirBlock = styled(Paper)(() => tw`w-1/2 mt-20 p-7 text-center`)
 
 export { AuthForm }

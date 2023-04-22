@@ -4,11 +4,11 @@ import useClientCheck from "@hooks/useClientCheck"
 import { MaterialIconName } from "../model/icon.types"
 
 type MaterialIconProps = {
-	name: MaterialIconName
+	name?: MaterialIconName
 	className?: string
 }
 
-const MaterialIcon: React.FC<MaterialIconProps> = ({ name, className }) => {
+const MaterialIcon: React.FC<MaterialIconProps> = ({ name = "MdAccountCircle", className }) => {
 	const { isClient } = useClientCheck()
 
 	const IconComponent = MaterialIcons[name]
