@@ -7,12 +7,14 @@ type SidebarMovieListProps = {
 	title: string
 	movies: Movie[]
 	className?: string
+	isLoading?: boolean
 }
 
 const SidebarMovieList: React.FC<SidebarMovieListProps> = ({
 	movies,
 	title,
 	className,
+	isLoading,
 }) => {
 	return (
 		<>
@@ -28,6 +30,7 @@ const SidebarMovieList: React.FC<SidebarMovieListProps> = ({
 							slug={slug}
 							genres={genres}
 							rating={rating}
+							isLoading={isLoading}
 						/>
 					))}
 			</Stack>

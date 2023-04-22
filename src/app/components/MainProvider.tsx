@@ -12,10 +12,7 @@ type MainProviderProps = WithChildren & {
 const MainProvider: React.FC<MainProviderProps> = ({ children, store }) => {
 	return (
 		<Provider store={store}>
-			<PersistGate
-				persistor={(store as any).__persistor}
-				loading={<div>Loading</div>}
-			>
+			<PersistGate persistor={(store as any).__persistor} loading={null}>
 				<NextProgressBar />
 				<ReduxToast />
 				{children}

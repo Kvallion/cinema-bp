@@ -3,12 +3,13 @@ import Image from "next/image"
 import Link from "next/link"
 import tw, { css, styled } from "twin.macro"
 import { Movie } from "@entities/movie/model/movie.types"
+import { SkeletonLoader } from "@ui/SkeletonLoader"
 import { MaterialIcon } from "@entities/icon"
 
 type SidebarMovieCardProps = Pick<
 	Movie,
 	"title" | "poster" | "slug" | "genres" | "rating"
-> & {}
+> & { isLoading?: boolean }
 
 const SidebarMovieCard: React.FC<SidebarMovieCardProps> = ({
 	title,
@@ -16,8 +17,9 @@ const SidebarMovieCard: React.FC<SidebarMovieCardProps> = ({
 	genres,
 	rating,
 	poster,
+	isLoading,
 }) => {
-	return (
+	return !isLoading ? (
 		<Card>
 			<Link href={getMovieRoute(slug)}>
 				<Poster
@@ -44,12 +46,22 @@ const SidebarMovieCard: React.FC<SidebarMovieCardProps> = ({
 				</Rating>
 			</Info>
 		</Card>
+	) : (
+		<Card>
+			<ImageSkeleton />
+			<Info>
+				<TitleSkeleton />
+				<GenresSkeleton />
+				<RatingSkeleton />
+			</Info>
+		</Card>
 	)
 }
 
-const Poster = styled(Image)`
-	rounded-image border border-transparent transition-colors image-like-bg
-`
+const Poster = styled(Image)(
+	() => tw`
+	rounded-image border border-transparent transition-colors image-like-bg`
+)
 
 const Info = tw.div`w-2/3 ml-4 flex flex-col`
 
@@ -72,5 +84,15 @@ const Card = styled.div(() => [
 		}
 	`,
 ])
+
+const ImageSkeleton = styled(SkeletonLoader)(() => tw`h-24 w-16 rounded-image`)
+
+const TitleSkeleton = styled(SkeletonLoader)(() => tw`h-6 rounded-full mb-1`)
+
+const GenresSkeleton = styled(SkeletonLoader)(() => tw`h-5 rounded-full mb-1`)
+
+const RatingSkeleton = styled(SkeletonLoader)(
+	() => tw`h-6 w-12 justify-self-start rounded-full`
+)
 
 export { SidebarMovieCard }
