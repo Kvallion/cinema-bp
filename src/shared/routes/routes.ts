@@ -14,3 +14,5 @@ export const getMovieRoute = (endpoint: string) => GENRE + addSlash(endpoint)
 export const TRENDING = ROOT + "trending"
 
 export const FAVORITES = ROOT + "favorites"
+
+export const PROFILE = ROOT + "/profile"

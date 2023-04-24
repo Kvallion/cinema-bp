@@ -27,7 +27,7 @@ const MyApp: FC<
 				onlyAdmin={onlyAdmin}
 				onlyUser={onlyUser}
 			/>
-			<DefaultLayout>
+			<DefaultLayout onlyAdmin={onlyAdmin}>
 				<Component {...props.pageProps} />
 			</DefaultLayout>
 		</MainProvider>

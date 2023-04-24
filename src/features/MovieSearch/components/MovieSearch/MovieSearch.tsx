@@ -1,10 +1,10 @@
-import { getMovieRoute } from "@shared/routes/routes"
-import { useState } from "react"
+import { memo, useState } from "react"
 import { useDebounce } from "use-debounce"
 import { useInput } from "@hooks/useInput"
 import { SearchWithPopup } from "@entities/search/components/SearchWithPopup"
 import { useGetAllMoviesQuery } from "@entities/movie"
 import { SearchField } from "@entities/search"
+import { getMovieRoute } from "@shared/routes/routes"
 
 type MovieSearchProps = {
 	className?: string
@@ -29,4 +29,4 @@ const MovieSearch: React.FC<MovieSearchProps> = ({ className }) => {
 	)
 }
 
-export { MovieSearch }
+export default memo(MovieSearch)

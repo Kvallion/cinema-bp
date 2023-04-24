@@ -2,8 +2,7 @@ import { getGenreRoute } from "@shared/routes/routes"
 import { SkeletonLoader } from "@ui/SkeletonLoader"
 import { useGetPopularGenresQuery } from "@entities/genre"
 import { MaterialIconName } from "@entities/icon"
-import { Menu, MenuItem } from "@entities/menu"
-import { MenuItemSkeleton } from "@entities/menu"
+import { Menu, MenuItem, MenuItemSkeleton } from "@entities/navigation"
 
 type GenreMenuProps = {}
 
@@ -12,7 +11,7 @@ const itemCount = 4
 const GenreMenu: React.FC<GenreMenuProps> = () => {
 	const { data: genres, isFetching } = useGetPopularGenresQuery()
 	return (
-		<Menu menuTitle="popular genres">
+		<Menu menuTitle="popular genres" className="mb-14">
 			{!isFetching ? (
 				genres &&
 				genres

@@ -31,7 +31,7 @@ export const makeConfiguredStore = reducer => configureStore({
 })
 
 export const makeStore = ({ isServer }) => {
-	if (isServer) {
+	if (true) {
 		return makeConfiguredStore(rootReducer);
 	} else {
 		const { persistStore, persistReducer } = require('redux-persist');

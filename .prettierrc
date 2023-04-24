@@ -38,7 +38,8 @@
 		"^@app/(.*)$",
 		"^@widgets/(.*)$",
 		"^@features/(.*)$",
-		"^@entities/(.*)$"
+		"^@entities/(.*)$",
+		"^@shared/(.*)$"
 	],
 	"importOrderSeparation": false,
 	"importOrderSortSpecifiers": true

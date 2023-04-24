@@ -1,18 +1,22 @@
-import s from "./Navigation.module.scss"
-
-import { NavigationLogo } from "@entities/logo"
-import withClasses, { WithClassesInjectionProps } from "@shared/hoc/withClasses"
 import { MenuContainer } from "../MenuContainer"
+import cn from "clsx"
+import { memo } from "react"
+import tw from "twin.macro"
+import { AppLogo } from "@entities/navigation"
+import { SidebarPanel } from "@entities/sidebar"
 
-type NavigationProps = WithClassesInjectionProps & {}
+type NavigationProps = { className?: string }
 
-const Navigation: React.FC<NavigationProps> = ({ cn }) => {
+const Navigation: React.FC<NavigationProps> = ({ className }) => {
 	return (
-		<aside className={cn(s.navigation)}>
-			<NavigationLogo />
+		<NavSidebar className={className} onClick={e => e.stopPropagation()}>
+			<AppLogo className="mb-10 px-layout hidden xl:block" />
 			<MenuContainer />
-		</aside>
+		</NavSidebar>
 	)
 }
 
-export default withClasses(Navigation)
+const NavSidebar = tw(SidebarPanel)``
+NavSidebar.defaultProps = { variant: "left" }
+
+export default memo(Navigation)

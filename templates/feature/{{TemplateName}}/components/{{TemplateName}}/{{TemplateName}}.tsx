@@ -1,4 +1,3 @@
-import s from "./{{TemplateName}}.module.scss"
 
 type {{TemplateName}}Props = {}
 

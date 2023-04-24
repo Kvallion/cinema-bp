@@ -1,3 +1,4 @@
+import {memo} from "react"
 import tw, { styled } from "twin.macro"
 
 type {{TemplateName}}Props = {
@@ -8,4 +9,4 @@ const {{TemplateName}}: React.FC<{{TemplateName}}Props> = ({className}) => {
 	return <div className={className}>{{TemplateName}}</div>
 }
 
-export default {{TemplateName}}
+export default memo({{TemplateName}})

@@ -1,0 +1,85 @@
+@use "~shared/styles/mixins/breakpoints" as bp;
+@use "~shared/styles/vars" as v;
+
+.layout {
+	@apply relative grid min-h-screen;
+	grid-template-rows: auto 1fr auto;
+	grid-template-columns: 1fr;
+	grid-template-areas:
+		"tp"
+		"c"
+		"mn";
+
+	@include bp.lg {
+		grid-template-columns: 1fr minmax(v.$bar-width, v.$min-bar-width);
+		grid-template-areas:
+			"tp s"
+			"c s";
+	}
+
+	@include bp.xl {
+		grid-template-rows: auto 1fr;
+		grid-template-columns:
+			minmax(v.$bar-width, v.$min-bar-width) 1fr
+			minmax(v.$bar-width, v.$min-bar-width);
+		grid-template-areas:
+			"n tp s"
+			"n c s";
+	}
+}
+
+.top_part {
+	grid-area: tp;
+	@apply sticky top-0 bg-gray-900;
+}
+
+.header {
+	@include bp.xl {
+		display: none !important;
+	}
+	grid-area: h;
+}
+
+.admin_navigation {
+	@apply sticky top-0;
+	grid-area: an;
+}
+
+.navigation {
+	@apply top-0 hidden h-screen overflow-y-scroll transition-transform hide-scroll;
+
+	@apply lg:fixed lg:left-0 lg:z-3 lg:block lg:-translate-x-full  lg:transform;
+
+	@apply xl:sticky xl:translate-x-0;
+
+	grid-area: n;
+
+	&.show {
+		@apply bottom-0 translate-x-0;
+	}
+}
+
+.mobile_panel_nav {
+	@apply fixed bottom-0 left-0 top-0 z-3  -translate-x-full transform overflow-y-scroll transition-transform hide-scroll;
+	@apply lg:hidden;
+	&.show {
+		@apply translate-x-0;
+	}
+}
+
+.mobile_nav {
+	@apply sticky bottom-0 lg:hidden;
+	grid-area: mn;
+}
+
+.content {
+	@apply px-4 py-layout md:px-layout;
+	grid-area: c;
+	min-height: 50vh;
+}
+
+.sidebar {
+	@apply sticky top-0 hidden h-screen overflow-y-scroll hide-scroll;
+	@apply lg:block;
+	grid-area: s;
+}

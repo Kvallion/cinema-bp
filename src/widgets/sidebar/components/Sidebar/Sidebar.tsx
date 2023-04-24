@@ -1,5 +1,6 @@
-import withClasses, { WithClassesInjectionProps } from "@shared/hoc/withClasses"
+import cn from "clsx"
 import dynamic from "next/dynamic"
+import { memo } from "react"
 import s from "./Sidebar.module.scss"
 import { MovieSearch } from "@features/MovieSearch"
 import { SidebarPopularMovies } from "@features/SidebarPopularMovies"
@@ -9,11 +10,11 @@ const LazyFavorites = dynamic(
 	{ ssr: false }
 )
 
-type SidebarProps = WithClassesInjectionProps & {}
+type SidebarProps = { className?: string }
 
-const Sidebar: React.FC<SidebarProps> = ({ cn }) => {
+const Sidebar: React.FC<SidebarProps> = ({ className }) => {
 	return (
-		<aside className={cn(s.sidebar)}>
+		<aside className={cn(s.sidebar, className)}>
 			<MovieSearch />
 			<div>
 				<SidebarPopularMovies />
@@ -23,4 +24,4 @@ const Sidebar: React.FC<SidebarProps> = ({ cn }) => {
 	)
 }
 
-export default withClasses(Sidebar)
+export default memo(Sidebar)

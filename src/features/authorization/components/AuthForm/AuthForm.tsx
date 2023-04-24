@@ -57,6 +57,6 @@ const AuthForm: React.FC<AuthFormProps> = () => {
 	)
 }
 
-const AirBlock = styled(Paper)(() => tw`w-1/2 mt-20 p-7 text-center`)
+const AirBlock = styled(Paper)(() => tw`w-full md:w-1/2 mt-20 p-7 text-center`)
 
 export { AuthForm }

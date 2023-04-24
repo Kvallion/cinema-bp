@@ -117,6 +117,13 @@ module.exports = {
         ".text-shadow": {
           textShadow: "1px 1px rgba(0,0,0, .4)",
         },
+        ".full-screen": {
+          position: "absolute",
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0
+        },
         ".outline-border-none": {
           outline: "none",
           border: "none",
