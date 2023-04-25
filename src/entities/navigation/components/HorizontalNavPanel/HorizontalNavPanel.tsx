@@ -31,7 +31,7 @@ const HorizontalNavPanel: FC<HorizontalNavPanelPropsProps> = ({
 					<NavItem key={link}>
 						<ItemLink
 							href={link}
-							active={asPath === link}
+							active={asPath === link ? "active" : "inactive"}
 							variant={variant}
 						>
 							<ItemIcon name={icon} active={asPath === link} />
@@ -57,16 +57,16 @@ const NavItemList = styled.ul<Variant>(({ variant }) => [
 
 const NavItem = tw.li`flex-grow`
 
-const ItemLink = styled(Link)<{ active: boolean } & Variant>(
+const ItemLink = styled(Link)<{ active: "active" | "inactive" } & Variant>(
 	({ active, variant }) => [
 		tw`relative block flex flex-col md:flex-row items-center justify-center px-2 md:px-5 py-4 text-center text-lg text-white text-opacity-60 transition-colors hover:text-opacity-100`,
-		active && tw`text-opacity-100`,
+		active === "active" && tw`text-opacity-100`,
 		css`
 			&::after {
 				${tw`absolute left-0 h-1 w-full bg-transparent transition-colors`}
 				content: "";
 				${variant === "top" ? tw`bottom-0` : tw`top-0`}
-				${active && tw`bg-primary`}
+				${active === "active" && tw`bg-primary`}
 			}
 		`,
 	]

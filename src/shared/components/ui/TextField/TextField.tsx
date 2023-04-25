@@ -1,21 +1,32 @@
-import { InputHTMLAttributes, MutableRefObject, forwardRef } from "react"
+import { InputHTMLAttributes, forwardRef } from "react"
 import { FieldError } from "react-hook-form"
-import tw, { styled } from "twin.macro"
+import tw, { css, styled } from "twin.macro"
+import useLabelState from "./useLabelState"
 
 type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
 	label: string
-	labelLifted?: boolean
 	error?: FieldError
 }
 
+type InputRefCb = (instance: HTMLInputElement) => void
+
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-	({ label, labelLifted, error, type = "text", className, ...rest }, ref) => {
+	({ label, error, type = "text", className, ...rest }, ref) => {
+		const { labelRaised, setRef } = useLabelState()
+
 		return (
 			<Wrapper className={className}>
 				<Field>
 					<Label>
-						<LabelText lifted={labelLifted}>{label}</LabelText>
-						<Input ref={ref} type={type} {...rest} />
+						<LabelText raised={labelRaised}>{label}</LabelText>
+						<Input
+							ref={el => {
+								setRef(el)
+								;(ref as InputRefCb)(el!)
+							}}
+							type={type}
+							{...rest}
+						/>
 					</Label>
 				</Field>
 				{error && <Error>{error.message}</Error>}
@@ -33,10 +44,9 @@ const Field = tw.div`
 
 const Label = tw.label`block`
 
-type LabelTextProps = { lifted?: boolean }
-const LabelText = styled.span<LabelTextProps>(({ lifted }) => [
+const LabelText = styled.span<{ raised: boolean }>(({ raised }) => [
 	tw`block text-xs uppercase text-gray-600 transform translate-y-5 transition-transform`,
-	lifted && tw`translate-y-0`,
+	raised && tw`translate-y-0`,
 ])
 
 const Input = tw.input`

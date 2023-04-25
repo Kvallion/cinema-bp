@@ -1,12 +1,13 @@
-import { RootState } from "@app/store"
-import { useAppDispatch } from "@hooks/redux"
+import { AuthForm } from "./types/auth.types"
 import {
+	PayloadAction,
 	bindActionCreators,
 	createSlice,
-	PayloadAction,
 } from "@reduxjs/toolkit"
+import { HYDRATE } from "next-redux-wrapper"
 import { useMemo } from "react"
-import { AuthForm } from "./types/auth.types"
+import { useAppDispatch } from "@hooks/redux"
+import { RootState } from "@app/store"
 
 const initialState: AuthForm = {
 	email: "",
@@ -27,6 +28,12 @@ export const AuthFormSlice = createSlice({
 			state.email = ""
 			state.password = ""
 		},
+	},
+	extraReducers(builder) {
+		builder.addCase<
+			typeof HYDRATE,
+			PayloadAction<RootState, typeof HYDRATE>
+		>(HYDRATE, (state, { payload }) => ({ ...state, ...payload.authForm }))
 	},
 })
 

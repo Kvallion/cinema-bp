@@ -1,13 +1,14 @@
-import { useMemo } from "react"
-import { RootState } from "@app/store"
-import { User } from "@entities/user"
 import {
+	PayloadAction,
 	bindActionCreators,
 	createSlice,
-	PayloadAction,
 } from "@reduxjs/toolkit"
-import { useAppDispatch } from "@hooks/redux"
+import { HYDRATE } from "next-redux-wrapper"
+import { useMemo } from "react"
 import { AuthResonseUser } from "../api/responses.types"
+import { useAppDispatch } from "@hooks/redux"
+import { User } from "@entities/user"
+import { RootState } from "@app/store"
 
 interface AuthSliceState {
 	user: AuthResonseUser | null
@@ -40,6 +41,12 @@ export const AuthSlice = createSlice({
 			state.accessToken = null
 			state.refreshToken = null
 		},
+	},
+	extraReducers(builder) {
+		builder.addCase<
+			typeof HYDRATE,
+			PayloadAction<RootState, typeof HYDRATE>
+		>(HYDRATE, (state, { payload }) => ({ ...state, ...payload.auth }))
 	},
 })
 

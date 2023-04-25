@@ -60,10 +60,10 @@ export default function useAuthForm() {
 	}
 
 	const doFieldsHaveContent: typeof dirtyFields = {
-		email: dirtyFields.email || !!defaultValues.email,
-		password: dirtyFields.password || !!defaultValues.password,
+		email: !!watch("email"),
+		password: !!watch("password"),
 	}
-	console.log(dirtyFields)
+
 	return {
 		type,
 		regInput,

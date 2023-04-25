@@ -1,8 +1,9 @@
-import { getGenreRoute } from "@shared/routes/routes"
+import { memo } from "react"
 import { SkeletonLoader } from "@ui/SkeletonLoader"
 import { useGetPopularGenresQuery } from "@entities/genre"
 import { MaterialIconName } from "@entities/icon"
 import { Menu, MenuItem, MenuItemSkeleton } from "@entities/navigation"
+import { getGenreRoute } from "@shared/routes/routes"
 
 type GenreMenuProps = {}
 
@@ -35,4 +36,4 @@ const GenreMenu: React.FC<GenreMenuProps> = () => {
 	)
 }
 
-export { GenreMenu }
+export default memo(GenreMenu)
