@@ -148,6 +148,7 @@ module.exports = {
         ".no-bg": {
           background: "none!important",
         }
+
       });
 
     }),

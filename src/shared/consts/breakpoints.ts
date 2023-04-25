@@ -1,4 +1,5 @@
 export const xs = 400
+export const ssm = 500
 export const sm = 640
 export const md = 768
 export const lg = 1024

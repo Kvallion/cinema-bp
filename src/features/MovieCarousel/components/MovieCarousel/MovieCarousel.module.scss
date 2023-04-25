@@ -1,0 +1,5 @@
+@use "~shared/styles/mixins/fade-bg-gradient" as fdb;
+
+.gradient {
+	@include fdb.fade-bg-gradient();
+}

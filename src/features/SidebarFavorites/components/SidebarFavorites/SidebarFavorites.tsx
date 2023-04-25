@@ -1,10 +1,10 @@
-import { FAVORITES } from "@shared/routes/routes"
 import Link from "next/link"
 import { useGetFavoritesQuery } from "@entities/user"
 import { _ } from "@shared/consts/utility"
 import { Button } from "@ui/Button"
 import { useCurrentUser } from "@features/authorization"
 import { SidebarMovieList } from "@entities/movie"
+import { FAVORITES } from "@shared/routes/routes"
 
 type SidebarFavoritesProps = {}
 
@@ -14,16 +14,18 @@ const SidebarFavorites: React.FC<SidebarFavoritesProps> = () => {
 		skip: !user,
 	})
 	return (
-		<div>
-			<SidebarMovieList
-				title="Favorite movies"
-				movies={movies || []}
-				className="mb-4"
-			/>
-			<Link href={FAVORITES}>
-				<Button text="See more" wFull />
-			</Link>
-		</div>
+		user && (
+			<div>
+				<SidebarMovieList
+					title="Favorite movies"
+					movies={movies || []}
+					className="mb-4"
+				/>
+				<Link href={FAVORITES}>
+					<Button text="See more" wFull />
+				</Link>
+			</div>
+		)
 	)
 }
 

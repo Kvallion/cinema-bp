@@ -21,7 +21,7 @@ const AuthForm: React.FC<AuthFormProps> = () => {
 		<AirBlock>
 			<form onSubmit={form.onSubmit}>
 				<Stack spacing={4} className="mb-4">
-					<Heading1 text="Authorization" />
+					<Heading1>Authorization</Heading1>
 					<TextField
 						label="Email"
 						labelLifted={form.doFieldsHaveContent.email}

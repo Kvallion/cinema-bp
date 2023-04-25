@@ -1,12 +1,5 @@
+import { Actor } from "@entities/actor"
 import { Genre } from "@entities/genre"
-
-export interface Actor {
-	_id: string
-	photo: string
-	name: string
-	countMovies: number
-	slug: string
-}
 
 export interface MovieParams {
 	year: number
