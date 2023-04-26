@@ -1,7 +1,7 @@
 import cn from "clsx"
 import dynamic from "next/dynamic"
 import { memo } from "react"
-import s from "./Sidebar.module.scss"
+import tw from "twin.macro"
 import { MovieSearch } from "@features/MovieSearch"
 import { SidebarPopularMovies } from "@features/SidebarPopularMovies"
 
@@ -14,14 +14,16 @@ type SidebarProps = { className?: string }
 
 const Sidebar: React.FC<SidebarProps> = ({ className }) => {
 	return (
-		<aside className={cn(s.sidebar, className)}>
+		<Aside className={className}>
 			<MovieSearch />
 			<div>
 				<SidebarPopularMovies />
 				<LazyFavorites />
 			</div>
-		</aside>
+		</Aside>
 	)
 }
+
+const Aside = tw.aside`border-l border-l-gray-800 bg-gray-900 px-8 py-11`
 
 export default memo(Sidebar)

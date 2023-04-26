@@ -79,6 +79,6 @@ export const Cell = tw.td`${tdThCommon}`
 const ColumnTitle = tw.th`${tdThCommon} py-2.5 font-semibold text-opacity-90`
 
 const EmptyTablePlaceholder = tw.tr`
-    py-3 text-center text-lg text-white text-opacity-60`
+    py-3 pt-6 block text-center text-lg text-white text-opacity-60`
 
 export { AdminTable }
