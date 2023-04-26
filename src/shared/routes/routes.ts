@@ -23,6 +23,9 @@ export const getEditGenreRoute = (endpoint: string) =>
 export const getEditActorRoute = (endpoint: string) =>
 	ADMIN + "/actor/edit" + addSlash(endpoint)
 
+export const getEditMovieRoute = (endpoint: string) =>
+	ADMIN + "/movie/edit" + addSlash(endpoint)
+
 export const TRENDING = ROOT + "trending"
 
 export const FAVORITES = ROOT + "favorites"
