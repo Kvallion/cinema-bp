@@ -15,10 +15,11 @@ const SearchField: FC<SearchFieldProps> = ({
 	value,
 	onChange,
 	searchOnEnter = false,
+	className,
 	...props
 }) => {
 	return (
-		<Wrapper>
+		<Wrapper className={className}>
 			<SearchIcon />
 			<Input
 				{...props}

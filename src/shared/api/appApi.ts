@@ -1,6 +1,6 @@
-import { baseQueryWithReAuth } from "@features/authorization/api/authBaseQuery"
 import { createApi } from "@reduxjs/toolkit/query/react"
 import { HYDRATE } from "next-redux-wrapper"
+import { baseQueryWithReAuth } from "@features/authorization/api/authBaseQuery"
 
 export const appApi = createApi({
 	baseQuery: baseQueryWithReAuth,
@@ -9,5 +9,6 @@ export const appApi = createApi({
 			return action.payload[reducerPath]
 		}
 	},
-	endpoints: (builder) => ({}),
+	tagTypes: ["User", "Genre", "Actor", "Movie"],
+	endpoints: builder => ({}),
 })

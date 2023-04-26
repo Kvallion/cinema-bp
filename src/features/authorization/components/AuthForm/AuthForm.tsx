@@ -24,14 +24,12 @@ const AuthForm: React.FC<AuthFormProps> = () => {
 					<Heading1>Authorization</Heading1>
 					<TextField
 						label="Email"
-						labelLifted={form.doFieldsHaveContent.email}
 						{...form.regInput("email", emailFieldConfig)}
 						error={form.errors.email}
 					/>
 					<TextField
 						type="password"
 						label="Password"
-						labelLifted={form.doFieldsHaveContent.password}
 						{...form.regInput("password", passwordFieldConfig)}
 						error={form.errors.password}
 					/>

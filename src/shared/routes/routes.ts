@@ -14,6 +14,9 @@ export const getMovieRoute = (endpoint: string) => MOVIE + addSlash(endpoint)
 export const ACTOR = ROOT + "actor"
 export const getActorRoute = (endpoint: string) => ACTOR + addSlash(endpoint)
 
+export const getEditUserRoute = (endpoint: string) =>
+	ADMIN + "/user/edit" + addSlash(endpoint)
+
 export const TRENDING = ROOT + "trending"
 
 export const FAVORITES = ROOT + "favorites"

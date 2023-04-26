@@ -21,7 +21,7 @@ export default function useAuthForm() {
 	const {
 		register: regInput,
 		handleSubmit,
-		formState: { errors, dirtyFields },
+		formState: { errors },
 		watch,
 		reset,
 	} = useForm<AuthForm>({
@@ -59,16 +59,10 @@ export default function useAuthForm() {
 		reset()
 	}
 
-	const doFieldsHaveContent: typeof dirtyFields = {
-		email: !!watch("email"),
-		password: !!watch("password"),
-	}
-
 	return {
 		type,
 		regInput,
 		onSubmit: handleSubmit(onSubmit),
-		doFieldsHaveContent,
 		errors,
 		switchType: () => setType(type === "login" ? "register" : "login"),
 		clear: clearForm,
