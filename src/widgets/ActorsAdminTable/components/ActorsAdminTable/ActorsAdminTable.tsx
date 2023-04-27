@@ -1,7 +1,12 @@
 import { useRouter } from "next/router"
-import { memo } from "react"
+import { memo, useCallback } from "react"
 import useDeboucedInput from "@hooks/useDeboucedInput"
-import { useDeleteActorMutation, useGetAllActorsQuery } from "@entities/actor"
+import { AdminTableActions } from "@features/AdminTableActions"
+import {
+	useCreateActorMutation,
+	useDeleteActorMutation,
+	useGetAllActorsQuery,
+} from "@entities/actor"
 import { SearchField } from "@entities/search"
 import { AdminTable } from "@entities/table"
 import { getEditActorRoute } from "@shared/routes/routes"
@@ -16,13 +21,17 @@ const ActorsAdminTable: React.FC<ActorsAdminTableProps> = () => {
 	})
 
 	const [deleteActor] = useDeleteActorMutation()
+	const [createActor] = useCreateActorMutation()
+
+	const handleCreateActor = useCallback(async () => {
+		const id = await createActor().unwrap()
+		push(getEditActorRoute(id))
+	}, [])
+
 	return (
 		<div>
-			<SearchField
-				placeholder="Search"
-				className="w-2/3 md:w-2/5"
-				{...input}
-			/>
+			<AdminTableActions {...input} create={handleCreateActor} />
+
 			<AdminTable
 				cellCount={2}
 				columnTitles={["Name", "Slug"]}

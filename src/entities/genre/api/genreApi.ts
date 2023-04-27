@@ -32,6 +32,13 @@ export const genreApi = appApi.injectEndpoints({
 			},
 		}),
 
+		createGenre: builder.mutation<string, void>({
+			query: () => ({
+				url: "/genres",
+				method: "POST",
+			}),
+			invalidatesTags: ["Genre"],
+		}),
 		deleteGenre: builder.mutation<string, string>({
 			query: id => ({
 				url: `genres/${id}`,
@@ -46,6 +53,7 @@ export const {
 	useGetAllGenresQuery,
 	useGetPopularGenresQuery,
 	useGetGenreMoviesCollectionsQuery,
+	useCreateGenreMutation,
 	useDeleteGenreMutation,
 } = genreApi
 export const { getAllGenres, getPopularGenres, getGenreMoviesCollections } =

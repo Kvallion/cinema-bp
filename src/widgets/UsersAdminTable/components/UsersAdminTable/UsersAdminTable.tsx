@@ -1,9 +1,9 @@
 import { useRouter } from "next/router"
-import { memo } from "react"
+import { memo, useCallback } from "react"
 import useDeboucedInput from "@hooks/useDeboucedInput"
 import { useDeleteUserMutation, useGetAllUsersQuery } from "@entities/user"
 import convertMongoDbDate from "@shared/lib/helper/convertMongoDbData"
-import { SearchField } from "@entities/search"
+import { AdminTableActions } from "@features/AdminTableActions"
 import { AdminTable } from "@entities/table"
 import { getEditUserRoute } from "@shared/routes/routes"
 
@@ -15,13 +15,10 @@ const UsersAdminTable: React.FC<UsersAdminTableProps> = () => {
 	const { data: users } = useGetAllUsersQuery(debouncedValue)
 
 	const [deleteUser] = useDeleteUserMutation()
+
 	return (
 		<div>
-			<SearchField
-				placeholder="Search"
-				className="w-2/3 md:w-2/5"
-				{...input}
-			/>
+			<AdminTableActions {...input} />
 			<AdminTable
 				cellCount={2}
 				columnTitles={["Email", "Registration date"]}

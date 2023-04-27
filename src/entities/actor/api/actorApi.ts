@@ -27,6 +27,13 @@ export const actorApi = appApi.injectEndpoints({
 			},
 		}),
 
+		createActor: builder.mutation<string, void>({
+			query: () => ({
+				url: `/actors`,
+				method: "POST",
+			}),
+			invalidatesTags: ["Actor"],
+		}),
 		deleteActor: builder.mutation<string, string>({
 			query: id => ({
 				url: `/actors/${id}`,
@@ -37,5 +44,9 @@ export const actorApi = appApi.injectEndpoints({
 	}),
 })
 
-export const { useGetAllActorsQuery, useDeleteActorMutation } = actorApi
+export const {
+	useGetAllActorsQuery,
+	useDeleteActorMutation,
+	useCreateActorMutation,
+} = actorApi
 export const { getAllActors } = actorApi.endpoints

@@ -1,8 +1,12 @@
 import { useRouter } from "next/router"
-import { memo } from "react"
+import { memo, useCallback } from "react"
 import useDeboucedInput from "@hooks/useDeboucedInput"
-import { useDeleteGenreMutation, useGetAllGenresQuery } from "@entities/genre"
-import { SearchField } from "@entities/search"
+import { AdminTableActions } from "@features/AdminTableActions"
+import {
+	useCreateGenreMutation,
+	useDeleteGenreMutation,
+	useGetAllGenresQuery,
+} from "@entities/genre"
 import { AdminTable } from "@entities/table"
 import { getEditGenreRoute } from "@shared/routes/routes"
 
@@ -14,13 +18,17 @@ const GenresAdminTable: React.FC<GenresAdminTableProps> = () => {
 	const { data: genres } = useGetAllGenresQuery(debouncedValue)
 
 	const [deleteGenre] = useDeleteGenreMutation()
+	const [createGenre] = useCreateGenreMutation()
+
+	const handleCreateGenre = useCallback(async () => {
+		const id = await createGenre().unwrap()
+		push(getEditGenreRoute(id))
+	}, [])
+
 	return (
 		<div>
-			<SearchField
-				placeholder="Search"
-				className="w-2/3 md:w-2/5"
-				{...input}
-			/>
+			<AdminTableActions {...input} create={handleCreateGenre} />
+
 			<AdminTable
 				cellCount={2}
 				columnTitles={["Name", "Slug"]}

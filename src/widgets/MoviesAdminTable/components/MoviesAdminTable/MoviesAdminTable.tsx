@@ -1,10 +1,12 @@
 import { useRouter } from "next/router"
-import { memo } from "react"
+import { memo, useCallback } from "react"
 import useDeboucedInput from "@hooks/useDeboucedInput"
+import { AdminTableActions } from "@features/AdminTableActions"
+import { useCreateActorMutation } from "@entities/actor"
 import { useDeleteMovieMutation, useGetAllMoviesQuery } from "@entities/movie"
 import { SearchField } from "@entities/search"
 import { AdminTable } from "@entities/table"
-import { getEditMovieRoute } from "@shared/routes/routes"
+import { getEditActorRoute, getEditMovieRoute } from "@shared/routes/routes"
 
 type MoviesAdminTableProps = {}
 
@@ -14,13 +16,17 @@ const MoviesAdminTable: React.FC<MoviesAdminTableProps> = () => {
 	const { data: movies } = useGetAllMoviesQuery(debouncedValue)
 
 	const [deleteMovie] = useDeleteMovieMutation()
+	const [createActor] = useCreateActorMutation()
+
+	const handleCreateActor = useCallback(async () => {
+		const id = await createActor().unwrap()
+		push(getEditActorRoute(id))
+	}, [])
+
 	return (
 		<div>
-			<SearchField
-				placeholder="Search"
-				className="w-2/3 md:w-2/5"
-				{...input}
-			/>
+			<AdminTableActions {...input} create={handleCreateActor} />
+
 			<AdminTable
 				cellCount={3}
 				columnTitles={["Title", "Genres", "Rating"]}

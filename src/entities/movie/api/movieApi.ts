@@ -28,7 +28,13 @@ const movieApi = appApi.injectEndpoints({
 				return error
 			},
 		}),
-
+		createMovie: builder.mutation<string, void>({
+			query: () => ({
+				url: `/movies`,
+				method: "POST",
+			}),
+			invalidatesTags: ["Movie"],
+		}),
 		deleteMovie: builder.mutation<string, string>({
 			query: id => ({
 				url: `genres/${id}`,
@@ -42,6 +48,7 @@ const movieApi = appApi.injectEndpoints({
 export const {
 	useGetAllMoviesQuery,
 	useGetPopularMoviesQuery,
+	useCreateMovieMutation,
 	useDeleteMovieMutation,
 } = movieApi
 
