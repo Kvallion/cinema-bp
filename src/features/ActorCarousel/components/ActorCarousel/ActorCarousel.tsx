@@ -7,7 +7,7 @@ import { getActorRoute } from "@shared/routes/routes"
 type ActorCarouselProps = { className?: string }
 
 const ActorCarousel: React.FC<ActorCarouselProps> = ({ className }) => {
-	const { data: actors } = useGetAllActorsQuery()
+	const { data: actors } = useGetAllActorsQuery({ limit: 7 })
 	return (
 		<section className={className}>
 			<SectionHeading className="mb-5">Popular actors</SectionHeading>

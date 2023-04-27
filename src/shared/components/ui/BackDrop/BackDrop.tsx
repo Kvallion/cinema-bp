@@ -10,7 +10,7 @@ const BackDrop: React.FC<BackDropProps> = ({ show, hide }) => {
 }
 
 const BackDrop_ = styled.div<{ show: boolean }>(({ show }) => [
-	tw`full-screen bg-black opacity-70 fixed z-2`,
+	tw`full-screen bg-black opacity-70 fixed z-5`,
 	!show && tw`hidden`,
 ])
 

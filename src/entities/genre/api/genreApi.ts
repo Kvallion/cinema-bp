@@ -1,5 +1,5 @@
 import { appApi } from "@shared/api/appApi"
-import { Genre } from "../model/genre.types"
+import { Collection, Genre } from "../model/genre.types"
 
 export const genreApi = appApi.injectEndpoints({
 	endpoints: builder => ({
@@ -8,20 +8,28 @@ export const genreApi = appApi.injectEndpoints({
 				url: "/genres",
 				params: searchTerm ? { searchTerm } : {},
 			}),
-			providesTags: (result, error, arg) =>
-				result
-					? [
-							...result.map(({ _id }) => ({
-								type: "Genre" as const,
-								id: _id,
-							})),
-							"Genre",
-					  ]
-					: ["Genre"],
+			providesTags: (result, error, arg) => {
+				let genres: { type: "Genre"; id: string }[] = []
+				if (result)
+					genres = result.map(g => ({ type: "Genre", id: g._id }))
+				return [...genres, "Genre"]
+			},
 		}),
 		getPopularGenres: builder.query<Genre[], void>({
 			query: () => "/genres",
 			transformResponse: (data: Genre[]) => data.slice(0, 10),
+		}),
+		getGenreMoviesCollections: builder.query<Collection[], void>({
+			query: () => "/genres/collections",
+			providesTags: (result, error, arg) => {
+				let collections: { type: "Collection"; id: string }[] = []
+				if (result)
+					collections = result.map(c => ({
+						type: "Collection",
+						id: c._id,
+					}))
+				return [...collections, "Collection"]
+			},
 		}),
 
 		deleteGenre: builder.mutation<string, string>({
@@ -37,6 +45,8 @@ export const genreApi = appApi.injectEndpoints({
 export const {
 	useGetAllGenresQuery,
 	useGetPopularGenresQuery,
+	useGetGenreMoviesCollectionsQuery,
 	useDeleteGenreMutation,
 } = genreApi
-export const { getAllGenres, getPopularGenres } = genreApi.endpoints
+export const { getAllGenres, getPopularGenres, getGenreMoviesCollections } =
+	genreApi.endpoints

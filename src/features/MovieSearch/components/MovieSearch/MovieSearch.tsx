@@ -12,8 +12,8 @@ type MovieSearchProps = {
 
 const MovieSearch: React.FC<MovieSearchProps> = ({ className }) => {
 	const { value: searchTerm, input } = useInput()
-	const [debouncedsearchTerm] = useDebounce(searchTerm, 500)
-	const { data: movies } = useGetAllMoviesQuery(debouncedsearchTerm)
+	const [debouncedSearchTerm] = useDebounce(searchTerm, 500)
+	const { data: movies } = useGetAllMoviesQuery(debouncedSearchTerm)
 
 	return (
 		<SearchWithPopup

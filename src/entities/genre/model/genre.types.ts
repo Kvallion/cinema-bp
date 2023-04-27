@@ -5,3 +5,10 @@ export type Genre = {
 	description: string
 	icon: string
 }
+
+export type Collection = {
+	_id: string
+	image: string
+	title: string
+	slug: string
+}

@@ -12,16 +12,12 @@ export const userApi = appApi.injectEndpoints({
 				url: "/users",
 				params: searchTerm ? { searchTerm } : {},
 			}),
-			providesTags: (result, error, arg) =>
-				result
-					? [
-							...result.map(({ _id }) => ({
-								type: "User" as const,
-								id: _id,
-							})),
-							"User",
-					  ]
-					: ["User"],
+			providesTags: (result, error, arg) => {
+				let users: { type: "User"; id: string }[] = []
+				if (result)
+					users = result.map(u => ({ type: "User", id: u._id }))
+				return [...users, "User"]
+			},
 		}),
 		getUserProfile: builder.query<User, void>({
 			query: () => "/users/profile",

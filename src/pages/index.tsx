@@ -40,9 +40,11 @@ const HomePage: NextPage = () => {
 
 export const getStaticProps = wrapper.getStaticProps(
 	(store: AppStore) => async ctx => {
-		await layoutApiCall(store.dispatch)
-		await store.dispatch(getAllMovies.initiate(_))
-		await store.dispatch(getAllActors.initiate())
+		await Promise.all([
+			layoutApiCall(store.dispatch),
+			store.dispatch(getAllMovies.initiate(_)),
+			store.dispatch(getAllActors.initiate(_)),
+		])
 
 		return {
 			props: {},

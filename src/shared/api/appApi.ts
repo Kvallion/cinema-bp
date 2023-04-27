@@ -9,6 +9,6 @@ export const appApi = createApi({
 			return action.payload[reducerPath]
 		}
 	},
-	tagTypes: ["User", "Genre", "Actor", "Movie"],
+	tagTypes: ["User", "Genre", "Actor", "Movie", "Collection"],
 	endpoints: builder => ({}),
 })

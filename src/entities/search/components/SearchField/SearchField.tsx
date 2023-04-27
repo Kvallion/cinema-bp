@@ -4,14 +4,14 @@ import tw, { css, styled } from "twin.macro"
 import { MaterialIcon } from "@entities/icon"
 
 export type SearchFieldProps = InputHTMLAttributes<HTMLInputElement> & {
-	placeholder: string
+	placeholder?: string
 	value: string
 	onChange: (e: ChangeEvent<HTMLInputElement>) => any
 	searchOnEnter?: boolean
 }
 
 const SearchField: FC<SearchFieldProps> = ({
-	placeholder,
+	placeholder = "Search...",
 	value,
 	onChange,
 	searchOnEnter = false,

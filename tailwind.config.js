@@ -27,6 +27,10 @@ module.exports = {
       },
     },
     extend: {
+      screens: {
+        "ssm": "500px",
+        "xs": "400px",
+      },
       spacing: {
         0.5: "0.12rem",
         layout: "2.75rem",
@@ -48,6 +52,9 @@ module.exports = {
         1: "1",
         2: "2",
         3: "3",
+        4: "4",
+        5: "5",
+        6: "6",
       },
       keyframes: {
         fade: {

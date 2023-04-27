@@ -10,23 +10,19 @@ const movieApi = appApi.injectEndpoints({
 				url: "/movies",
 				params: { searchTerm },
 			}),
-			providesTags: (result, error, arg) =>
-				result
-					? [
-							...result.map(({ _id }) => ({
-								type: "Movie" as const,
-								id: _id,
-							})),
-							"Movie",
-					  ]
-					: ["Movie"],
+			providesTags: (result, error, arg) => {
+				let movies: { type: "Movie"; id: string }[] = []
+				if (result)
+					movies = result.map(m => ({ type: "Movie", id: m._id }))
+				return [...movies, "Movie"]
+			},
 		}),
 		getPopularMovies: builder.query<Movie[], void>({
 			query: () => "/movies/most-popular",
 			transformResponse: (movies: Movie[]) => movies.slice(0, 3),
 			transformErrorResponse(error: any, meta) {
 				toastr.error(
-					"Faild to fetch popular movies",
+					"Failed to fetch popular movies",
 					(error.error as string) || ""
 				)
 				return error

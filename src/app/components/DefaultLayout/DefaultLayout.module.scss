@@ -30,7 +30,7 @@
 
 .top_part {
 	grid-area: tp;
-	@apply sticky top-0 z-2 bg-gray-900;
+	@apply sticky top-0 z-4 bg-gray-900;
 }
 
 .header {
@@ -48,7 +48,7 @@
 .navigation {
 	@apply top-0 hidden h-screen overflow-y-scroll transition-transform hide-scroll;
 
-	@apply lg:fixed lg:left-0 lg:z-3 lg:block lg:-translate-x-full  lg:transform;
+	@apply lg:fixed lg:left-0 lg:z-6 lg:block lg:-translate-x-full  lg:transform;
 
 	@apply xl:sticky xl:translate-x-0;
 
@@ -68,7 +68,7 @@
 }
 
 .mobile_nav {
-	@apply sticky bottom-0 z-2 lg:hidden;
+	@apply sticky bottom-0 z-4 lg:hidden;
 	grid-area: mn;
 }
 

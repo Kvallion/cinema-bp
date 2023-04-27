@@ -5,11 +5,13 @@ export const actorApi = appApi.injectEndpoints({
 	endpoints: builder => ({
 		getAllActors: builder.query<
 			Actor[],
-			{ searchTerm: string; limit?: number } | undefined
+			{ searchTerm?: string; limit?: number } | undefined
 		>({
 			query: params => ({
 				url: "/actors",
-				params: params ? { searchTerm: params.searchTerm } : {},
+				params: params?.searchTerm
+					? { searchTerm: params.searchTerm }
+					: {},
 			}),
 			transformResponse(actors: Actor[], meta, arg) {
 				if (Array.isArray(actors)) {
@@ -17,16 +19,12 @@ export const actorApi = appApi.injectEndpoints({
 				}
 				return actors
 			},
-			providesTags: (result, error, arg) =>
-				result
-					? [
-							...result.map(({ _id }) => ({
-								type: "Actor" as const,
-								id: _id,
-							})),
-							"Actor",
-					  ]
-					: ["Actor"],
+			providesTags: (result, error, arg) => {
+				let actors: { type: "Actor"; id: string }[] = []
+				if (result)
+					actors = result.map(a => ({ type: "Actor", id: a._id }))
+				return [...actors, "Actor"]
+			},
 		}),
 
 		deleteActor: builder.mutation<string, string>({
