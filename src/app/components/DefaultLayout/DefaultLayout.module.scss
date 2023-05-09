@@ -60,7 +60,7 @@
 }
 
 .mobile_panel_nav {
-	@apply fixed bottom-0 left-0 top-0 z-3  -translate-x-full transform overflow-y-scroll transition-transform hide-scroll;
+	@apply fixed bottom-0 left-0 top-0 z-6  -translate-x-full transform overflow-y-scroll transition-transform hide-scroll;
 	@apply lg:hidden;
 	&.show {
 		@apply translate-x-0;

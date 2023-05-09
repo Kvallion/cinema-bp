@@ -15,6 +15,10 @@ export const genreApi = appApi.injectEndpoints({
 				return [...genres, "Genre"]
 			},
 		}),
+		getGenreById: builder.query<Genre, string>({
+			query: id => `/genres/${id}`,
+			providesTags: (result, error, id) => [{ type: "Genre", id }],
+		}),
 		getPopularGenres: builder.query<Genre[], void>({
 			query: () => "/genres",
 			transformResponse: (data: Genre[]) => data.slice(0, 10),
@@ -39,6 +43,16 @@ export const genreApi = appApi.injectEndpoints({
 			}),
 			invalidatesTags: ["Genre"],
 		}),
+		updateGenre: builder.mutation<string, Genre>({
+			query: genre => ({
+				url: `genres/${genre._id}`,
+				method: "PUT",
+				body: genre,
+			}),
+			invalidatesTags: (result, error, genre) => [
+				{ type: "Genre", id: genre._id },
+			],
+		}),
 		deleteGenre: builder.mutation<string, string>({
 			query: id => ({
 				url: `genres/${id}`,
@@ -51,10 +65,16 @@ export const genreApi = appApi.injectEndpoints({
 
 export const {
 	useGetAllGenresQuery,
+	useGetGenreByIdQuery,
 	useGetPopularGenresQuery,
 	useGetGenreMoviesCollectionsQuery,
 	useCreateGenreMutation,
 	useDeleteGenreMutation,
+	useUpdateGenreMutation,
 } = genreApi
-export const { getAllGenres, getPopularGenres, getGenreMoviesCollections } =
-	genreApi.endpoints
+export const {
+	getAllGenres,
+	getGenreById,
+	getPopularGenres,
+	getGenreMoviesCollections,
+} = genreApi.endpoints

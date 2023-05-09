@@ -1,4 +1,5 @@
 import { ChangeEvent, memo } from "react"
+import tw from "twin.macro"
 import { Button } from "@ui/Button"
 import { SearchField } from "@entities/search"
 
@@ -14,17 +15,17 @@ const AdminTableActions: React.FC<AdminTableActionsProps> = ({
 	create,
 }) => {
 	return (
-		<div className="flex justify-between">
+		<div className="flex gap-4 flex-col items-start xs:flex-row justify-between xs:items-center">
 			<SearchField
-				className="w-2/3 md:w-2/5"
+				className="flex-grow ssm:flex-grow-0 ssm:w-2/3 md:w-2/5"
 				value={value}
 				onChange={onChange}
 			/>
-			{create && (
-				<Button variant="primary" text="Create new" onClick={create} />
-			)}
+			{create && <CreateButton text="Create new" onClick={create} />}
 		</div>
 	)
 }
+
+const CreateButton = tw(Button)`px-4 whitespace-nowrap`
 
 export default memo(AdminTableActions)

@@ -1,0 +1,17 @@
+.wrapper {
+	.editor {
+		@apply h-96 overflow-hidden rounded-b-lg border border-gray-700 px-4 text-gray-500;
+	}
+
+	.toolbar {
+		@apply mb-0 mt-4 gap-y-3 rounded-b-none rounded-t-lg bg-gray-600 bg-opacity-40 p-3 outline-border-none;
+
+		> div {
+			@apply m-0;
+
+			> div {
+				@apply mx-1.5 bg-gray-500 shadow-none transition-colors outline-border-none hover:bg-gray-300;
+			}
+		}
+	}
+}

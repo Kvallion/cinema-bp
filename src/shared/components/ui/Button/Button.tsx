@@ -22,10 +22,13 @@ const Button: React.FC<ButtonProps> = ({
 }
 
 type StyledButtonProps = Pick<ButtonProps, "wFull" | "variant">
-const StyledButton = styled.button<StyledButtonProps>(({ wFull, variant }) => [
-	tw`btn-primary py-2.5 px-10`,
-	wFull && tw`w-full`,
-	variant === "secondary" && tw`bg-gray-700`,
-])
+const StyledButton = styled.button<StyledButtonProps>(
+	({ wFull, variant, disabled }) => [
+		tw`btn-primary py-2.5 px-10 bg-primary`,
+		disabled && tw`bg-opacity-70`,
+		wFull && tw`w-full`,
+		variant === "secondary" && tw`bg-gray-700 hover:bg-gray-600`,
+	]
+)
 
 export { Button }
