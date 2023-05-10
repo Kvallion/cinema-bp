@@ -26,6 +26,10 @@ export const actorApi = appApi.injectEndpoints({
 				return [...actors, "Actor"]
 			},
 		}),
+		getActorById: builder.query<Actor, string>({
+			query: id => `/actors/${id}`,
+			providesTags: (result, error, id) => [{ type: "Actor", id }],
+		}),
 
 		createActor: builder.mutation<string, void>({
 			query: () => ({
@@ -33,6 +37,16 @@ export const actorApi = appApi.injectEndpoints({
 				method: "POST",
 			}),
 			invalidatesTags: ["Actor"],
+		}),
+		updateActor: builder.mutation<string, Omit<Actor, "countMovies">>({
+			query: actor => ({
+				url: `actors/${actor._id}`,
+				method: "PUT",
+				body: actor,
+			}),
+			invalidatesTags: (result, error, actor) => [
+				{ type: "Actor", id: actor._id },
+			],
 		}),
 		deleteActor: builder.mutation<string, string>({
 			query: id => ({
@@ -46,7 +60,9 @@ export const actorApi = appApi.injectEndpoints({
 
 export const {
 	useGetAllActorsQuery,
+	useGetActorByIdQuery,
 	useDeleteActorMutation,
 	useCreateActorMutation,
+	useUpdateActorMutation,
 } = actorApi
-export const { getAllActors } = actorApi.endpoints
+export const { getAllActors, getActorById } = actorApi.endpoints

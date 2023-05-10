@@ -154,6 +154,9 @@ module.exports = {
         },
         ".no-bg": {
           background: "none!important",
+        },
+        ".pb-full": {
+          paddingBottom: "100%"
         }
 
       });

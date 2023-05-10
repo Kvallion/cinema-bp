@@ -2,6 +2,8 @@ import { addSlash } from "@shared/lib/helper/routes"
 
 export const ROOT = "/"
 
+export const AUTH = ROOT + "auth"
+
 export const ADMIN = ROOT + "manage"
 export const getAdminRoute = (endpoint: string) => ADMIN + addSlash(endpoint)
 

@@ -23,18 +23,18 @@ const AdminTable: React.FC<AdminTableProps> = ({
 }) => {
 	return (
 		<table className="block">
-			<TableHead>
-				{Array.from({ length: cellCount }).map((_, i) => (
-					<ColumnTitle
-						key={columnTitles[i]}
-						className={columnsWidth ? columnsWidth[i] : "w-1/4"}
-					>
-						{columnTitles[i]}
-					</ColumnTitle>
-				))}
-				<ColumnTitle>Actions</ColumnTitle>
-			</TableHead>
 			<tbody className="block">
+				<TableHead>
+					{Array.from({ length: cellCount }).map((_, i) => (
+						<ColumnTitle
+							key={columnTitles[i]}
+							className={columnsWidth ? columnsWidth[i] : "w-1/4"}
+						>
+							{columnTitles[i]}
+						</ColumnTitle>
+					))}
+					<ColumnTitle>Actions</ColumnTitle>
+				</TableHead>
 				{isLoading ? (
 					<CircularLoader />
 				) : data.length > 0 ? (
@@ -55,7 +55,9 @@ const AdminTable: React.FC<AdminTableProps> = ({
 					))
 				) : (
 					<EmptyTablePlaceholder>
-						{placeholderText || "No data."}
+						<td className="block">
+							{placeholderText || "No data."}
+						</td>
 					</EmptyTablePlaceholder>
 				)}
 			</tbody>
@@ -65,7 +67,7 @@ const AdminTable: React.FC<AdminTableProps> = ({
 
 const RowHeadCommon = `mt-4 block flex items-center justify-between gap-4 rounded-lg bg-opacity-20 px-5 text-left transition-colors`
 
-const TableHead = tw.thead`
+const TableHead = tw.tr`
     ${RowHeadCommon} mt-8 bg-primary shadow-lg hover:bg-opacity-30`
 
 const Row = tw.tr`

@@ -1,18 +1,20 @@
+import {
+	ActorEditFormState,
+	defaultValues,
+} from "../components/ActorEditForm/ActorEditForm.types"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
-import { GenreEditFormState, defaultValues } from "../model/GenreEditForm"
-import useLogger from "@hooks/useLogger"
-import { useGetGenreByIdQuery, useUpdateGenreMutation } from "@entities/genre"
+import { useGetActorByIdQuery, useUpdateActorMutation } from "@entities/actor"
 import { MaterialIconName } from "@entities/icon"
 
-export default function useGenreEditForm() {
+export default function useActorEditForm() {
 	const { query } = useRouter()
 	const id = query.id as string
-	const { data } = useGetGenreByIdQuery(id)
+	const { data } = useGetActorByIdQuery(id)
 
 	const { register, control, formState, handleSubmit, watch, setValue } =
-		useForm<GenreEditFormState>({
+		useForm<ActorEditFormState>({
 			mode: "onSubmit",
 			defaultValues,
 		})
@@ -21,35 +23,25 @@ export default function useGenreEditForm() {
 		if (data) {
 			setValue("name", data.name, { shouldDirty: true })
 			setValue("slug", data.slug, { shouldDirty: true })
-			setValue("icon", data.icon as MaterialIconName, {
-				shouldDirty: true,
-			})
-			setValue("description", data.description, { shouldDirty: true })
+			setValue("photo", data.photo, { shouldDirty: true })
 		}
 	}, [data])
 
-	const [name, slug, icon, description] = watch([
-		"name",
-		"slug",
-		"icon",
-		"description",
-	])
+	const [name, slug, photo] = watch(["name", "slug", "photo"])
 
 	const { back } = useRouter()
-	const [updateGenre, { isLoading: isSubmiting }] = useUpdateGenreMutation()
+	const [updateActor, { isLoading: isSubmiting }] = useUpdateActorMutation()
 
-	const onSubmit: SubmitHandler<GenreEditFormState> = ({
+	const onSubmit: SubmitHandler<ActorEditFormState> = ({
 		name,
 		slug,
-		description,
-		icon,
+		photo,
 	}) => {
-		updateGenre({
+		updateActor({
 			_id: id,
 			name,
 			slug,
-			description,
-			icon: icon || "",
+			photo,
 		})
 		back()
 	}
@@ -61,7 +53,7 @@ export default function useGenreEditForm() {
 		control,
 		onSubmit: handleSubmit(onSubmit),
 		errors: formState.errors,
-		values: { name, slug, icon, description },
+		values: { name, slug, photo },
 		slugDirty: formState.dirtyFields.slug,
 		setSlug: (slug: string) =>
 			setValue("slug", slug, { shouldDirty: false, shouldTouch: false }),

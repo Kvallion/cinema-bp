@@ -2,16 +2,19 @@ import dynamic from "next/dynamic"
 import { memo } from "react"
 import { Controller } from "react-hook-form"
 import tw from "twin.macro"
-import useGenreEditForm from "@widgets/GenreEditForm/hooks/useGenreEditForm"
+import useLogger from "@hooks/useLogger"
+import useActorEditForm from "@widgets/ActorEditForm/hooks/useActorEditForm"
 import {
+	photoExtension,
 	requiredName,
 	requiredSlug,
-} from "@widgets/GenreEditForm/consts/GenreEditFormMsgs"
+} from "@widgets/ActorEditForm/consts/ActorEditFormMsgs"
 import IconSelectSkeleton from "@features/IconSelect/components/IconSelectSkeleton"
 import { TextEditorSkeleton } from "@features/TextEditor/components/TextEditorSkeleton"
 import { TextField } from "@ui/TextField"
 import { EditFormActions } from "@features/EditFormActions"
 import { SlugField } from "@features/SlugField"
+import { UploadField } from "@entities/file-upload"
 
 const LazyTextEditor = dynamic(
 	async () => (await import("@features/TextEditor")).TextEditor,
@@ -23,12 +26,11 @@ const LazyIconSelect = dynamic(
 	{ ssr: false, loading: () => <IconSelectSkeleton /> }
 )
 
-type GenreEditFormProps = { className?: string }
+type ActorEditFormProps = { className?: string }
 
-const GenreEditForm: React.FC<GenreEditFormProps> = ({ className }) => {
+const ActorEditForm: React.FC<ActorEditFormProps> = ({ className }) => {
 	const {
 		isLoading,
-		isSubmiting,
 		register,
 		control,
 		errors,
@@ -36,14 +38,15 @@ const GenreEditForm: React.FC<GenreEditFormProps> = ({ className }) => {
 		values,
 		setSlug,
 		slugDirty,
-	} = useGenreEditForm()
-	const { name } = values
+	} = useActorEditForm()
+	const { name, photo } = values
+	useLogger("photo", photo)
 
 	return (
 		<form onSubmit={onSubmit} className={className}>
 			<Grid className="mb-8">
 				<TextField
-					label="Genre name"
+					label="Full name"
 					{...register("name", { required: requiredName })}
 					error={errors.name}
 					isLoading={isLoading}
@@ -57,22 +60,36 @@ const GenreEditForm: React.FC<GenreEditFormProps> = ({ className }) => {
 					slugDirty={!!slugDirty}
 					isLoading={isLoading}
 				/>
+			</Grid>
 
+			<div className="w-full xs:w-3/5">
 				<Controller
 					control={control}
-					name="icon"
-					render={({ field, fieldState: { error } }) => (
-						<LazyIconSelect
-							label="Icon"
-							field={field}
+					name="photo"
+					rules={{
+						required: "Photo is required",
+						pattern: {
+							value: /.+\.(jpg|jpeg|png|webp)$/,
+							message: photoExtension,
+						},
+					}}
+					render={({
+						field: { value, onChange },
+						fieldState: { error },
+					}) => (
+						<UploadField
+							label="Photo"
+							type="image"
+							onChange={onChange}
+							uri={value}
+							folder="actors"
 							error={error}
-							isLoading={isLoading}
 						/>
 					)}
 				/>
-			</Grid>
+			</div>
 
-			<Controller
+			{/* <Controller
 				control={control}
 				name="description"
 				defaultValue=""
@@ -92,16 +109,13 @@ const GenreEditForm: React.FC<GenreEditFormProps> = ({ className }) => {
 						isLoading={isLoading}
 					/>
 				)}
-			/>
+			/> */}
 
-			<EditFormActions
-				submitDisabled={isLoading || isSubmiting}
-				className="mt-8"
-			/>
+			<EditFormActions submitDisabled={isLoading} className="mt-8" />
 		</form>
 	)
 }
 
 const Grid = tw.div`grid grid-cols-2 gap-8`
 
-export default memo(GenreEditForm)
+export default memo(ActorEditForm)

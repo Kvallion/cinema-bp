@@ -60,4 +60,4 @@ const Input = tw.input`
 `
 export const Error = tw.span`mt-2 block w-full text-left text-sm text-primary`
 
-export default TextField
+export { TextField }
