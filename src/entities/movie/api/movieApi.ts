@@ -1,7 +1,7 @@
-import build from "next/dist/build"
 import { toastr } from "react-redux-toastr"
 import { appApi } from "@shared/api/appApi"
 import { Movie } from "../model/movie.types"
+import { MovieEditFormState } from "@widgets/MovieEditForm/components/MovieEditForm/MovieEditForm.types"
 
 const movieApi = appApi.injectEndpoints({
 	endpoints: builder => ({
@@ -16,6 +16,10 @@ const movieApi = appApi.injectEndpoints({
 					movies = result.map(m => ({ type: "Movie", id: m._id }))
 				return [...movies, "Movie"]
 			},
+		}),
+		getMovieById: builder.query<Movie, string>({
+			query: id => `/movies/${id}`,
+			providesTags: (result, error, id) => [{ type: "Movie", id }],
 		}),
 		getPopularMovies: builder.query<Movie[], void>({
 			query: () => "/movies/most-popular",
@@ -35,6 +39,19 @@ const movieApi = appApi.injectEndpoints({
 			}),
 			invalidatesTags: ["Movie"],
 		}),
+		updateMovie: builder.mutation<
+			string,
+			MovieEditFormState & { _id: string }
+		>({
+			query: movie => ({
+				url: `movies/${movie._id}`,
+				method: "PUT",
+				body: movie,
+			}),
+			invalidatesTags: (result, error, movie) => [
+				{ type: "Movie", id: movie._id },
+			],
+		}),
 		deleteMovie: builder.mutation<string, string>({
 			query: id => ({
 				url: `genres/${id}`,
@@ -47,9 +64,12 @@ const movieApi = appApi.injectEndpoints({
 
 export const {
 	useGetAllMoviesQuery,
+	useGetMovieByIdQuery,
 	useGetPopularMoviesQuery,
 	useCreateMovieMutation,
+	useUpdateMovieMutation,
 	useDeleteMovieMutation,
 } = movieApi
 
-export const { getAllMovies, getPopularMovies } = movieApi.endpoints
+export const { getAllMovies, getMovieById, getPopularMovies } =
+	movieApi.endpoints

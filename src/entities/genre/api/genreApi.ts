@@ -51,6 +51,7 @@ export const genreApi = appApi.injectEndpoints({
 			}),
 			invalidatesTags: (result, error, genre) => [
 				{ type: "Genre", id: genre._id },
+				"Collection",
 			],
 		}),
 		deleteGenre: builder.mutation<string, string>({

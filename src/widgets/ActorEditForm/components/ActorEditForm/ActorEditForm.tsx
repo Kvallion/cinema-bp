@@ -1,30 +1,16 @@
-import dynamic from "next/dynamic"
 import { memo } from "react"
 import { Controller } from "react-hook-form"
 import tw from "twin.macro"
-import useLogger from "@hooks/useLogger"
 import useActorEditForm from "@widgets/ActorEditForm/hooks/useActorEditForm"
 import {
 	photoExtension,
 	requiredName,
 	requiredSlug,
 } from "@widgets/ActorEditForm/consts/ActorEditFormMsgs"
-import IconSelectSkeleton from "@features/IconSelect/components/IconSelectSkeleton"
-import { TextEditorSkeleton } from "@features/TextEditor/components/TextEditorSkeleton"
 import { TextField } from "@ui/TextField"
 import { EditFormActions } from "@features/EditFormActions"
 import { SlugField } from "@features/SlugField"
 import { UploadField } from "@entities/file-upload"
-
-const LazyTextEditor = dynamic(
-	async () => (await import("@features/TextEditor")).TextEditor,
-	{ ssr: false, loading: () => <TextEditorSkeleton /> }
-)
-
-const LazyIconSelect = dynamic(
-	async () => (await import("@features/IconSelect")).IconSelect,
-	{ ssr: false, loading: () => <IconSelectSkeleton /> }
-)
 
 type ActorEditFormProps = { className?: string }
 
@@ -39,8 +25,7 @@ const ActorEditForm: React.FC<ActorEditFormProps> = ({ className }) => {
 		setSlug,
 		slugDirty,
 	} = useActorEditForm()
-	const { name, photo } = values
-	useLogger("photo", photo)
+	const { name } = values
 
 	return (
 		<form onSubmit={onSubmit} className={className}>
@@ -62,7 +47,7 @@ const ActorEditForm: React.FC<ActorEditFormProps> = ({ className }) => {
 				/>
 			</Grid>
 
-			<div className="w-full xs:w-3/5">
+			<Grid tw="grid-cols-1 sm:grid-cols-2">
 				<Controller
 					control={control}
 					name="photo"
@@ -84,10 +69,11 @@ const ActorEditForm: React.FC<ActorEditFormProps> = ({ className }) => {
 							uri={value}
 							folder="actors"
 							error={error}
+							isLoading={isLoading}
 						/>
 					)}
 				/>
-			</div>
+			</Grid>
 
 			{/* <Controller
 				control={control}

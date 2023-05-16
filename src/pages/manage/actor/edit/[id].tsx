@@ -6,7 +6,7 @@ import { NextPageAuth } from "@features/authorization"
 
 const ActorEditPage: NextPageAuth = () => {
 	return (
-		<div className="p-4 sm:p-11">
+		<div className="py-4 px-12 sm:p-11">
 			<PageMeta title="Edit actor | Admin panel" />
 			<AdminPageHeading>Edit actor</AdminPageHeading>
 			<ActorEditForm className="mt-5" />
