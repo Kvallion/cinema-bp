@@ -1,13 +1,19 @@
-import { TRENDING } from "@shared/routes/routes"
 import Link from "next/link"
+import { _ } from "@shared/consts/utility"
 import s from "./SidebarPopularMovies.module.scss"
 import { Button } from "@ui/Button"
 import { SidebarMovieList, useGetPopularMoviesQuery } from "@entities/movie"
+import { TRENDING } from "@shared/routes/routes"
 
 type SidebarPopularMoviesProps = {}
 
 const SidebarPopularMovies: React.FC<SidebarPopularMoviesProps> = () => {
-	const { data: movies, isFetching } = useGetPopularMoviesQuery()
+	const { data: movies } = useGetPopularMoviesQuery(_, {
+		selectFromResult: state => ({
+			...state,
+			data: state.data?.slice(0, 3) || _,
+		}),
+	})
 	return (
 		<div className={s.popular_movies}>
 			<SidebarMovieList

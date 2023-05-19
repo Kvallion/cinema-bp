@@ -23,7 +23,6 @@ const movieApi = appApi.injectEndpoints({
 		}),
 		getPopularMovies: builder.query<Movie[], void>({
 			query: () => "/movies/most-popular",
-			transformResponse: (movies: Movie[]) => movies.slice(0, 3),
 			transformErrorResponse(error: any, meta) {
 				toastr.error(
 					"Failed to fetch popular movies",

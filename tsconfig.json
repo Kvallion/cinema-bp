@@ -22,6 +22,7 @@
 		"baseUrl": "./src",
 		"paths": {
 			"@ui/*": ["shared/components/ui/*"],
+			"@styles/*": ["shared/styles/*"],
 			"@hooks/*": ["shared/hooks/*"],
 			"@shared/*": ["shared/*"],
 			"@entities/*": ["entities/*"],
