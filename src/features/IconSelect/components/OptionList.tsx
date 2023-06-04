@@ -14,7 +14,7 @@ const OptionList: FC<
 	const initialOffset = options.indexOf(value) * height
 	const childrenArr = Children.toArray(children)
 	return (
-		<div onClick={e => console.log("click")}>
+		<div>
 			<List
 				width="100%"
 				height={maxHeight}

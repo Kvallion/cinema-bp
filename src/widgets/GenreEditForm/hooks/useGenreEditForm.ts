@@ -2,7 +2,6 @@ import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { GenreEditFormState, defaultValues } from "../model/GenreEditForm"
-import useLogger from "@hooks/useLogger"
 import { useGetGenreByIdQuery, useUpdateGenreMutation } from "@entities/genre"
 import { MaterialIconName } from "@entities/icon"
 

@@ -1,3 +1,5 @@
+import { useWindowDimensions } from "@hooks/useWindowDimensions"
+import { md, ssm } from "@shared/consts/breakpoints"
 import cn from "clsx"
 import Image from "next/image"
 import Link from "next/link"
@@ -5,9 +7,6 @@ import { Mousewheel, Navigation } from "swiper"
 import "swiper/css"
 import { Swiper, SwiperSlide } from "swiper/react"
 import tw, { css, styled } from "twin.macro"
-import useLogger from "@hooks/useLogger"
-import { useWindowDimensions } from "@hooks/useWindowDimensions"
-import { md, ssm } from "@shared/consts/breakpoints"
 import s from "./MultipleCarousel.module.scss"
 
 type MultipleCarouselProps<T> = {
@@ -91,3 +90,4 @@ const Title = tw.span`mb-1 font-semibold text-white text-shadow`
 const Subtitle = tw.span`text-gray-500 text-shadow`
 
 export { MultipleCarousel }
+

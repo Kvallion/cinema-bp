@@ -1,5 +1,7 @@
+import { toastr } from "react-redux-toastr"
 import { appApi } from "@shared/api/appApi"
 import { User } from "../model/user.types"
+import { toastError } from "@shared/lib/helper/toasts/toastError"
 import { Movie } from "@entities/movie"
 
 export const userApi = appApi.injectEndpoints({
@@ -22,9 +24,6 @@ export const userApi = appApi.injectEndpoints({
 		getUserProfile: builder.query<User, void>({
 			query: () => "/users/profile",
 		}),
-		getFavorites: builder.query<Movie[], void>({
-			query: () => "/users/profile/favorites",
-		}),
 
 		deleteUser: builder.mutation<string, string>({
 			query: id => ({
@@ -33,12 +32,31 @@ export const userApi = appApi.injectEndpoints({
 			}),
 			invalidatesTags: (result, error, id) => [{ type: "User", id }],
 		}),
+
+		getFavorites: builder.query<Movie[], void>({
+			query: () => "/users/profile/favorites",
+		}),
+		toggleFavorites: builder.mutation<void, string>({
+			query: movieId => ({
+				url: "/users/profile/favorites",
+				method: "POST",
+				body: { movieId },
+			}),
+			transformErrorResponse(error: any, meta) {
+				toastr.error(
+					"Failed to update favorites",
+					(error.error as string) || ""
+				)
+				return error
+			},
+		}),
 	}),
 })
 
 export const {
 	useGetUserProfileQuery,
 	useGetFavoritesQuery,
+	useToggleFavoritesMutation,
 	useGetUsersCountQuery,
 	useGetAllUsersQuery,
 	useDeleteUserMutation,

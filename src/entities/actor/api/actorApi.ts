@@ -30,6 +30,12 @@ export const actorApi = appApi.injectEndpoints({
 			query: id => `/actors/${id}`,
 			providesTags: (result, error, id) => [{ type: "Actor", id }],
 		}),
+		getActorBySlug: builder.query<Actor, string>({
+			query: slug => `/actors/by-slug/${slug}`,
+			providesTags: (result, error, id) => [
+				result ? { type: "Actor", id: result._id } : "Actor",
+			],
+		}),
 
 		createActor: builder.mutation<string, void>({
 			query: () => ({
@@ -61,8 +67,9 @@ export const actorApi = appApi.injectEndpoints({
 export const {
 	useGetAllActorsQuery,
 	useGetActorByIdQuery,
+	useGetActorBySlugQuery,
 	useDeleteActorMutation,
 	useCreateActorMutation,
 	useUpdateActorMutation,
 } = actorApi
-export const { getAllActors, getActorById } = actorApi.endpoints
+export const { getAllActors, getActorById, getActorBySlug } = actorApi.endpoints

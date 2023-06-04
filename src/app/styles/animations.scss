@@ -1,0 +1,8 @@
+@keyframes heart-burst {
+	0% {
+		@apply bg-left;
+	}
+	100% {
+		@apply bg-right;
+	}
+}
