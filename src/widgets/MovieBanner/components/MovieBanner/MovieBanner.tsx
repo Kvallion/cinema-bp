@@ -55,13 +55,6 @@ const MovieBanner: React.FC<MovieBannerProps> = ({ movie }) => {
 							link: getGenreRoute(`/${g.slug}`),
 						}))}
 					/>
-					<Detail
-						name="Actors"
-						links={actors.slice(0, 4).map(a => ({
-							title: a.name,
-							link: getActorRoute(`/${a.slug}`),
-						}))}
-					/>
 				</ul>
 
 				<Rating>

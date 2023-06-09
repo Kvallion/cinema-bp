@@ -58,7 +58,7 @@ const UploadField: React.FC<UploadFieldProps> = ({
 }
 
 const UploadFieldSkeleton = () => (
-	<div className="w-full flex flex-col items-start gap-y-5 gap-x-2">
+	<Container>
 		<div className="mr-auto">
 			<FieldLabelSkeleton className="mb-4" />
 			<div className="flex items-center">
@@ -69,8 +69,10 @@ const UploadFieldSkeleton = () => (
 		<PreviewRatio className="mr-auto">
 			<PreviewSkeleton />
 		</PreviewRatio>
-	</div>
+	</Container>
 )
+
+const Container = tw.div`w-full flex flex-col items-start gap-y-5 gap-x-2`
 
 const StyledField = tw(Field)`border-b-0`
 

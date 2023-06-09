@@ -22,6 +22,16 @@ module.exports = withTwin({
         destination: "http://localhost:4200/uploads/:path*",
       },
     ]
-  }
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+        port: '',
+        pathname: '/vi/**',
+      },
+    ],
+  },
 })
 

@@ -4,9 +4,9 @@ import {
 	photoExtension,
 	requiredBigPoster,
 	requiredPoster,
-	requiredVideo,
-	videoExtension,
+	ybVideoLink,
 } from "../consts/MovieEditFormMsgs"
+import { commonPattern } from "@entities/YoutubeLinkField/consts/ybLinkPatterns"
 
 export const posterRules: RegisterOptions<MovieEditFormState, "poster"> = {
 	required: requiredPoster,
@@ -27,7 +27,7 @@ export const bigPosterRules: RegisterOptions<MovieEditFormState, "bigPoster"> =
 
 export const videoRules: RegisterOptions<MovieEditFormState, "videoUrl"> = {
 	pattern: {
-		value: /.+\.(mp4|avi|wmv|webm|mov|avchd)$/,
-		message: videoExtension,
+		value: commonPattern,
+		message: ybVideoLink,
 	},
 }

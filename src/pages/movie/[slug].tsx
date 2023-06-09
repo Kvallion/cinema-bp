@@ -4,8 +4,11 @@ import { useRouter } from "next/router"
 import layoutApiCall from "@app/api/layout-api-call"
 import { _ } from "@shared/consts/utility"
 import { PageMeta } from "@shared/components/PageMeta"
+import { Stack } from "@shared/components/Stack"
 import { AppStore, makeStore, wrapper } from "@app/store"
 import { MovieBanner } from "@widgets/MovieBanner"
+import { ActorCarousel } from "@features/ActorCarousel"
+import { MovieTrailerPlayer } from "@features/MovieTrailerPlayer"
 import {
 	getAllMovies,
 	getMovieBySlug,
@@ -31,9 +34,17 @@ const MoviePage: NextPage = () => {
 
 			{movie && <MovieBanner movie={movie} />}
 
-			<div className="px-4 xs:px-0">
+			<Stack spacing={4} className="mt-6 px-4 xs:px-0">
+				<ActorCarousel
+					title="Movie Cast"
+					actors={movie?.actors || []}
+				/>
+				<MovieTrailerPlayer
+					className="my-6"
+					videoUrl={movie!.videoUrl}
+				/>
 				<LazyRateMovie movieId={movie!._id} slug={movie!.slug} />
-			</div>
+			</Stack>
 		</div>
 	)
 }

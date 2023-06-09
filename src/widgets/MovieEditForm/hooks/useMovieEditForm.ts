@@ -48,6 +48,7 @@ export default function useMovieEditForm() {
 	}, [data])
 
 	const title = watch("title")
+	const videoUrl = watch("videoUrl")
 
 	const { back } = useRouter()
 	const [updateMovie, { isLoading: isSubmiting }] = useUpdateMovieMutation()
@@ -67,7 +68,7 @@ export default function useMovieEditForm() {
 		control,
 		onSubmit: handleSubmit(onSubmit),
 		errors: formState.errors,
-		values: { title },
+		values: { title, videoUrl },
 		genres,
 		actors,
 		slugDirty: formState.dirtyFields.slug,

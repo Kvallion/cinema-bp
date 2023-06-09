@@ -155,6 +155,11 @@ module.exports = {
         ".no-bg": {
           background: "none!important",
         },
+        ".ratio-16-9": {
+          position: "relative",
+          width: "100%",
+          paddingBottom: "56%"
+        },
         ".pb-full": {
           paddingBottom: "100%"
         }

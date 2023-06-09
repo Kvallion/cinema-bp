@@ -54,6 +54,7 @@
 		"react-star-rating-component": "^1.4.1",
 		"react-transition-group": "^4.4.5",
 		"react-window": "^1.8.9",
+		"react-youtube": "^10.1.0",
 		"redux-persist": "^6.0.0",
 		"sass": "^1.62.0",
 		"string-strip-html": "^13.2.2",

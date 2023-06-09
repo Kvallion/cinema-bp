@@ -24,6 +24,7 @@ import { Stack } from "@shared/components/Stack"
 import { TextField } from "@ui/TextField"
 import { EditFormActions } from "@features/EditFormActions"
 import { SlugField } from "@features/SlugField"
+import { YoutubeLinkField } from "@entities/YoutubeLinkField"
 import { UploadField } from "@entities/file-upload"
 
 const LazyTextEditor = dynamic(
@@ -65,7 +66,7 @@ const MovieEditForm: React.FC<MovieEditFormProps> = ({ className }) => {
 			) || [],
 		[actors]
 	)
-	const { title } = values
+	const { title, videoUrl } = values
 
 	return (
 		<form onSubmit={onSubmit} className={className}>
@@ -189,24 +190,12 @@ const MovieEditForm: React.FC<MovieEditFormProps> = ({ className }) => {
 							/>
 						)}
 					/>
-					<Controller
-						control={control}
-						name="videoUrl"
-						rules={videoRules}
-						render={({
-							field: { value, onChange },
-							fieldState: { error },
-						}) => (
-							<UploadField
-								label="Video"
-								type="video"
-								onChange={onChange}
-								uri={value}
-								folder="movies"
-								error={error}
-								isLoading={isLoading}
-							/>
-						)}
+					<YoutubeLinkField
+						label="Trailer YouTube Link"
+						{...register("videoUrl", videoRules)}
+						error={errors.videoUrl}
+						value={videoUrl}
+						isLoading={isLoading}
 					/>
 				</Grid2>
 

@@ -1,6 +1,9 @@
 import { NextPage } from "next"
 import layoutApiCall from "@app/api/layout-api-call"
-import { getAllActors } from "@entities/actor/api/actorApi"
+import {
+	getAllActors,
+	useGetAllActorsQuery,
+} from "@entities/actor/api/actorApi"
 import { _ } from "@shared/consts/utility"
 import { PageMeta } from "@shared/components/PageMeta"
 import { PageHeading } from "@ui/PageHeading"
@@ -12,6 +15,7 @@ import { getPopularMovies, useGetPopularMoviesQuery } from "@entities/movie"
 
 const HomePage: NextPage = () => {
 	const { data: movies } = useGetPopularMoviesQuery()
+	const { data: actors } = useGetAllActorsQuery({ limit: 7 })
 	return (
 		<div className="px-0 py-5 md:p-layout">
 			<PageMeta
@@ -25,7 +29,11 @@ const HomePage: NextPage = () => {
 
 			<div className="px-4 md:px-0">
 				<TrendingMoviesCarousel className="mb-10" />
-				<ActorCarousel />
+				<ActorCarousel
+					title="Popular actors"
+					actors={actors || []}
+					getSubtitle={a => `${a.countMovies} movies`}
+				/>
 			</div>
 		</div>
 	)

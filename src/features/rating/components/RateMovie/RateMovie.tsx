@@ -47,7 +47,7 @@ const RateMovie: React.FC<RateMovieProps> = ({ movieId, slug }) => {
 }
 
 const Wrapper = styled.div(() => [
-	tw`air-block mx-auto my-10 w-1/2 p-7 text-center`,
+	tw`air-block mx-auto my-10 w-full sm:w-1/2 p-7 text-center`,
 	css`
 		.dv-star-rating {
 			${tw``}

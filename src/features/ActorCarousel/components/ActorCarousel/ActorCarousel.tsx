@@ -1,16 +1,25 @@
-import { memo } from "react"
 import { useGetAllActorsQuery } from "@entities/actor/api/actorApi"
 import { SectionHeading } from "@ui/SectionHeading"
+import { Actor } from "@entities/actor"
 import { MultipleCarousel } from "@entities/сarousel"
 import { getActorRoute } from "@shared/routes/routes"
 
-type ActorCarouselProps = { className?: string }
+type ActorCarouselProps = {
+	className?: string
+	title?: string
+	getSubtitle?: (a: Actor) => string
+	actors: Actor[]
+}
 
-const ActorCarousel: React.FC<ActorCarouselProps> = ({ className }) => {
-	const { data: actors } = useGetAllActorsQuery({ limit: 7 })
+const ActorCarousel: React.FC<ActorCarouselProps> = ({
+	title,
+	getSubtitle,
+	actors,
+	className,
+}) => {
 	return (
 		<section className={className}>
-			<SectionHeading className="mb-5">Popular actors</SectionHeading>
+			{title && <SectionHeading className="mb-5">{title}</SectionHeading>}
 			<MultipleCarousel
 				data={actors || []}
 				imagePriority
@@ -18,10 +27,10 @@ const ActorCarousel: React.FC<ActorCarouselProps> = ({ className }) => {
 				getLink={a => getActorRoute(a.slug)}
 				getImage={a => a.photo}
 				getTitle={a => a.name}
-				getSubtitle={a => `${a.countMovies} movies`}
+				getSubtitle={getSubtitle}
 			/>
 		</section>
 	)
 }
 
-export default memo(ActorCarousel)
+export default ActorCarousel
