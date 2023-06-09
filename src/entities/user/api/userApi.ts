@@ -61,4 +61,4 @@ export const {
 	useGetAllUsersQuery,
 	useDeleteUserMutation,
 } = userApi
-export const { getUserProfile } = userApi.endpoints
+export const { getUserProfile, getFavorites } = userApi.endpoints

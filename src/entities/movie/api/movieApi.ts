@@ -2,6 +2,7 @@ import { toastr } from "react-redux-toastr"
 import { appApi } from "@shared/api/appApi"
 import { Movie } from "../model/movie.types"
 import { MovieEditFormState } from "@widgets/MovieEditForm/components/MovieEditForm/MovieEditForm.types"
+import { Genre } from "@entities/genre"
 
 const movieApi = appApi.injectEndpoints({
 	endpoints: builder => ({
@@ -26,6 +27,19 @@ const movieApi = appApi.injectEndpoints({
 			providesTags: (result, error, id) => [
 				result ? { type: "Movie", id: result._id } : "Movie",
 			],
+		}),
+		getMoviesByGenres: builder.query<Movie[], string[]>({
+			query: genreIds => ({
+				url: `/movies/by-genres`,
+				method: "POST",
+				body: { genreIds },
+			}),
+			providesTags: (result, error, arg) => {
+				let movies: { type: "Movie"; id: string }[] = []
+				if (result)
+					movies = result.map(m => ({ type: "Movie", id: m._id }))
+				return [...movies, "Movie"]
+			},
 		}),
 		getPopularMovies: builder.query<Movie[], void>({
 			query: () => "/movies/most-popular",
@@ -71,11 +85,17 @@ export const {
 	useGetAllMoviesQuery,
 	useGetMovieByIdQuery,
 	useGetMovieBySlugQuery,
+	useGetMoviesByGenresQuery,
 	useGetPopularMoviesQuery,
 	useCreateMovieMutation,
 	useUpdateMovieMutation,
 	useDeleteMovieMutation,
 } = movieApi
 
-export const { getAllMovies, getMovieById, getMovieBySlug, getPopularMovies } =
-	movieApi.endpoints
+export const {
+	getAllMovies,
+	getMovieById,
+	getMovieBySlug,
+	getMoviesByGenres,
+	getPopularMovies,
+} = movieApi.endpoints

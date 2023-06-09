@@ -19,6 +19,12 @@ export const genreApi = appApi.injectEndpoints({
 			query: id => `/genres/${id}`,
 			providesTags: (result, error, id) => [{ type: "Genre", id }],
 		}),
+		getGenreBySlug: builder.query<Genre, string>({
+			query: slug => `/genres/by-slug/${slug}`,
+			providesTags: (result, error) => [
+				{ type: "Genre", id: result?._id },
+			],
+		}),
 		getPopularGenres: builder.query<Genre[], void>({
 			query: () => "/genres",
 			transformResponse: (data: Genre[]) => data.slice(0, 10),
@@ -67,6 +73,7 @@ export const genreApi = appApi.injectEndpoints({
 export const {
 	useGetAllGenresQuery,
 	useGetGenreByIdQuery,
+	useGetGenreBySlugQuery,
 	useGetPopularGenresQuery,
 	useGetGenreMoviesCollectionsQuery,
 	useCreateGenreMutation,
@@ -76,6 +83,7 @@ export const {
 export const {
 	getAllGenres,
 	getGenreById,
+	getGenreBySlug,
 	getPopularGenres,
 	getGenreMoviesCollections,
 } = genreApi.endpoints

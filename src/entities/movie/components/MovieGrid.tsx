@@ -1,4 +1,3 @@
-import { memo } from "react"
 import tw from "twin.macro"
 import { Movie } from "../model/movie.types"
 import ImageCard from "@ui/ImageCard"
@@ -29,4 +28,4 @@ const MovieGrid: React.FC<MovieGridProps> = ({ movies }) => {
 
 const Grid = tw.div`grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-6`
 
-export default memo(MovieGrid)
+export default MovieGrid
