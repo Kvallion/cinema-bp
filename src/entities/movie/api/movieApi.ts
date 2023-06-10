@@ -41,6 +41,15 @@ const movieApi = appApi.injectEndpoints({
 				return [...movies, "Movie"]
 			},
 		}),
+		getMoviesByActor: builder.query<Movie[], string>({
+			query: actorId => `/movies/by-actor/${actorId}`,
+			providesTags: (result, error, arg) => {
+				let movies: { type: "Movie"; id: string }[] = []
+				if (result)
+					movies = result.map(m => ({ type: "Movie", id: m._id }))
+				return [...movies, "Movie"]
+			},
+		}),
 		getPopularMovies: builder.query<Movie[], void>({
 			query: () => "/movies/most-popular",
 			transformErrorResponse(error: any, meta) {
@@ -85,6 +94,7 @@ export const {
 	useGetAllMoviesQuery,
 	useGetMovieByIdQuery,
 	useGetMovieBySlugQuery,
+	useGetMoviesByActorQuery,
 	useGetMoviesByGenresQuery,
 	useGetPopularMoviesQuery,
 	useCreateMovieMutation,
@@ -96,6 +106,7 @@ export const {
 	getAllMovies,
 	getMovieById,
 	getMovieBySlug,
+	getMoviesByActor,
 	getMoviesByGenres,
 	getPopularMovies,
 } = movieApi.endpoints

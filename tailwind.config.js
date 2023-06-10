@@ -160,6 +160,11 @@ module.exports = {
           width: "100%",
           paddingBottom: "56%"
         },
+        ".ratio-2-3": {
+          position: "relative",
+          width: "100%",
+          paddingBottom: "150%"
+        },
         ".pb-full": {
           paddingBottom: "100%"
         }
