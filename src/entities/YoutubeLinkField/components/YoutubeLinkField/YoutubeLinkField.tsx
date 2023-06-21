@@ -16,7 +16,6 @@ const YoutubeLinkField: React.FC<YoutubeLinkFieldProps> = forwardRef<
 	const videoId = useYbLink(value)
 
 	useEffect(() => {
-		console.log(videoId, src)
 		if (videoId) {
 			setSrc(previewUrl(videoId))
 		} else {

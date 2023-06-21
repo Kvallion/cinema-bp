@@ -30,12 +30,12 @@ const DiscoveryPage: NextPage = () => {
 			<SearchField className="mt-5 w-2/3 md:w-2/5" {...input} />
 			<Grid className="mt-10">
 				{filteredCollecitons &&
-					filteredCollecitons.map(({ _id, image, title, slug }) => (
+					filteredCollecitons.map(({ _id, images, title, slug }) => (
 						<MovieStackCard
 							key={_id}
 							title={title}
 							link={getGenreRoute(slug)}
-							posters={[image, image, image]}
+							posters={images}
 						/>
 					))}
 			</Grid>

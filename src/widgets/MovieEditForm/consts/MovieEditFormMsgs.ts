@@ -9,6 +9,6 @@ export const requiredPoster = "Poster is a required field."
 export const requiredBigPoster = "Large poster is a required field."
 export const requiredVideo = "Video is a required field."
 export const photoExtension =
-	"Image extension must be one of the following: jpg, jpeg, png, webp"
+	"Image extension must be one of the following: jpg, jpeg, jfif, png, webp"
 
 export const ybVideoLink = "This link is not a correct YouTube video link."

@@ -11,7 +11,7 @@ import { commonPattern } from "@entities/YoutubeLinkField/consts/ybLinkPatterns"
 export const posterRules: RegisterOptions<MovieEditFormState, "poster"> = {
 	required: requiredPoster,
 	pattern: {
-		value: /.+\.(jpg|jpeg|png|webp)$/,
+		value: /.+\.(jpg|jpeg|jfif|png|webp)$/,
 		message: photoExtension,
 	},
 }
@@ -20,7 +20,7 @@ export const bigPosterRules: RegisterOptions<MovieEditFormState, "bigPoster"> =
 	{
 		required: requiredBigPoster,
 		pattern: {
-			value: /.+\.(jpg|jpeg|png|webp)$/,
+			value: /.+\.(jpg|jpeg|jfif|png|webp)$/,
 			message: photoExtension,
 		},
 	}

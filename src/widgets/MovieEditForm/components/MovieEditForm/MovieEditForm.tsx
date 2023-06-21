@@ -66,6 +66,7 @@ const MovieEditForm: React.FC<MovieEditFormProps> = ({ className }) => {
 			) || [],
 		[actors]
 	)
+	console.log("actorOPitons", actorOptions)
 	const { title, videoUrl } = values
 
 	return (

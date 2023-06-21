@@ -9,7 +9,7 @@ import { Actor } from "@entities/actor"
 type ActorInfoProps = { actor: Actor }
 
 const ActorInfo: React.FC<ActorInfoProps> = ({
-	actor: { photo, name, countMovies },
+	actor: { photo, name, countMovies, birthDate, birthPlace, careerPeriod },
 }) => {
 	return (
 		<Grid>
@@ -31,11 +31,11 @@ const ActorInfo: React.FC<ActorInfoProps> = ({
 						"Career period",
 					]}
 					values={[
-						1999,
-						"USA",
+						birthDate,
+						birthPlace,
 						countMovies,
 						["Drama", "Thriller"],
-						"2008-2023",
+						careerPeriod,
 					]}
 				/>
 			</Stack>

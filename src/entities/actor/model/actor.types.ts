@@ -4,4 +4,8 @@ export type Actor = {
 	name: string
 	countMovies: number
 	slug: string
+	birthDate: string
+	birthPlace: string
+	careerPeriod: string
+	miniBio: string
 }

@@ -50,9 +50,8 @@ export const actorApi = appApi.injectEndpoints({
 				method: "PUT",
 				body: actor,
 			}),
-			invalidatesTags: (result, error, actor) => [
-				{ type: "Actor", id: actor._id },
-			],
+			invalidatesTags: (result, error, actor) => ["Actor"],
+			// [{ type: "Actor", id: actor._id }]
 		}),
 		deleteActor: builder.mutation<string, string>({
 			query: id => ({

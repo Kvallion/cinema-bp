@@ -131,6 +131,9 @@ module.exports = {
           left: 0,
           right: 0
         },
+        ".max-h-inf": {
+          maxHeight: "3000px"
+        },
         ".outline-border-none": {
           outline: "none",
           border: "none",

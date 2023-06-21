@@ -1,9 +1,11 @@
+import parse from "html-react-parser"
 import { GetStaticPaths, NextPage } from "next"
 import { useRouter } from "next/router"
+import tw from "twin.macro"
 import layoutApiCall from "@app/api/layout-api-call"
 import { _ } from "@shared/consts/utility"
 import { PageMeta } from "@shared/components/PageMeta"
-import { PageHeading } from "@ui/PageHeading"
+import TextLimiter from "@ui/TextLimiter"
 import { AppStore, makeStore, wrapper } from "@app/store"
 import { ActorInfo } from "@features/ActorInfo"
 import {
@@ -31,9 +33,7 @@ const ActorPage: NextPage = () => {
 			/>
 			<ActorInfo actor={actor!} />
 
-			<h2 className="text-white text-2xl font-bold mt-8 mb-4">
-				Filmography
-			</h2>
+			<Heading className="mt-8 mb-4">Filmography</Heading>
 			<MultipleCarousel
 				data={movies || []}
 				getId={m => m._id}
@@ -41,9 +41,16 @@ const ActorPage: NextPage = () => {
 				getLink={m => getMovieRoute(m.slug)}
 				imagePriority
 			/>
+			<Heading className="mt-8 mb-4">Mini Biography</Heading>
+			<TextLimiter>
+				<Bio>{parse(actor?.miniBio || "")}</Bio>
+			</TextLimiter>
 		</div>
 	)
 }
+
+const Heading = tw.h2`text-white text-2xl font-bold`
+const Bio = tw.article`text-sm xs:text-lg font-light text-white text-opacity-60`
 
 export const getStaticPaths: GetStaticPaths = async context => {
 	try {

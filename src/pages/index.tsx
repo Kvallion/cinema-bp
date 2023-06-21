@@ -1,4 +1,5 @@
 import { NextPage } from "next"
+import { useEffect, useState } from "react"
 import layoutApiCall from "@app/api/layout-api-call"
 import {
 	getAllActors,
@@ -11,11 +12,15 @@ import { AppStore, wrapper } from "@app/store"
 import { ActorCarousel } from "@features/ActorCarousel"
 import { MovieCarousel } from "@features/MovieCarousel"
 import { TrendingMoviesCarousel } from "@features/TrendingMoviesCarousel"
+import { usePopularActors } from "@entities/actor"
 import { getPopularMovies, useGetPopularMoviesQuery } from "@entities/movie"
 
 const HomePage: NextPage = () => {
 	const { data: movies } = useGetPopularMoviesQuery()
-	const { data: actors } = useGetAllActorsQuery({ limit: 7 })
+	const { data: actors } = useGetAllActorsQuery(_)
+	console.log("actors", actors)
+	const popularActors = usePopularActors(actors)
+
 	return (
 		<div className="px-0 py-5 md:p-layout">
 			<PageMeta
@@ -31,7 +36,7 @@ const HomePage: NextPage = () => {
 				<TrendingMoviesCarousel className="mb-10" />
 				<ActorCarousel
 					title="Popular actors"
-					actors={actors || []}
+					actors={popularActors}
 					getSubtitle={a => `${a.countMovies} movies`}
 				/>
 			</div>

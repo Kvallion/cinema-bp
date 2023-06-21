@@ -6,7 +6,6 @@ import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useGetActorByIdQuery, useUpdateActorMutation } from "@entities/actor"
-import { MaterialIconName } from "@entities/icon"
 
 export default function useActorEditForm() {
 	const { query } = useRouter()
@@ -24,6 +23,10 @@ export default function useActorEditForm() {
 			setValue("name", data.name, { shouldDirty: true })
 			setValue("slug", data.slug, { shouldDirty: true })
 			setValue("photo", data.photo, { shouldDirty: true })
+			setValue("birthDate", data.birthDate, { shouldDirty: true })
+			setValue("birthPlace", data.birthPlace, { shouldDirty: true })
+			setValue("careerPeriod", data.careerPeriod, { shouldDirty: true })
+			setValue("miniBio", data.miniBio, { shouldDirty: true })
 		}
 	}, [data])
 
@@ -32,17 +35,8 @@ export default function useActorEditForm() {
 	const { back } = useRouter()
 	const [updateActor, { isLoading: isSubmiting }] = useUpdateActorMutation()
 
-	const onSubmit: SubmitHandler<ActorEditFormState> = ({
-		name,
-		slug,
-		photo,
-	}) => {
-		updateActor({
-			_id: id,
-			name,
-			slug,
-			photo,
-		})
+	const onSubmit: SubmitHandler<ActorEditFormState> = data => {
+		updateActor({ ...data, _id: id })
 		back()
 	}
 

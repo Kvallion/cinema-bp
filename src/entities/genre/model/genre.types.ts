@@ -8,7 +8,7 @@ export type Genre = {
 
 export type Collection = {
 	_id: string
-	image: string
+	images: string[]
 	title: string
 	slug: string
 }

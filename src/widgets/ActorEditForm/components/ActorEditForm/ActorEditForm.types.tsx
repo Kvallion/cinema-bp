@@ -6,4 +6,8 @@ export const defaultValues: ActorEditFormState = {
 	name: "",
 	slug: "",
 	photo: "",
+	birthDate: "",
+	birthPlace: "",
+	careerPeriod: "",
+	miniBio: "",
 }

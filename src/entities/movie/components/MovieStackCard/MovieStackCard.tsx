@@ -27,11 +27,11 @@ const MovieStackCard: React.FC<MovieStackCardProps> = ({
 			</Content>
 
 			<SecondPosterContainer className={s.gradient_vertical}>
-				<BgPoster src={posters[1]} alt={"background movie image"} />
+				<BgPoster src={posters.at(1) || posters[0]} alt={"background movie image"} />
 			</SecondPosterContainer>
 
 			<ThirdPosterContainer className={s.gradient_vertical}>
-				<BgPoster src={posters[2]} alt={"background movie image"} />
+				<BgPoster src={posters.at(2) || posters[0]} alt={"background movie image"} />
 			</ThirdPosterContainer>
 		</CardLink>
 	)
