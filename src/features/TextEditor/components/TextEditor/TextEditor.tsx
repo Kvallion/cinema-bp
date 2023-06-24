@@ -10,7 +10,7 @@ import { Error, Field, TextFieldProps } from "@ui/TextField/TextField"
 
 export type TextEditorProps = TextFieldProps &
 	Omit<EditorProps, "editorState"> & {
-		onChange: (...event: any[]) => void
+		onChange: (...params: any[]) => void
 		value: string
 	}
 

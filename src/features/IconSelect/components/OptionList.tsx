@@ -3,7 +3,7 @@ import { Children, FC } from "react"
 import { GroupBase, MenuListProps } from "react-select"
 import { FixedSizeList as List } from "react-window"
 import tw from "twin.macro"
-import { MaterialIcon, MaterialIconName } from "@entities/icon"
+import { MaterialIcon } from "@entities/icon"
 
 const height = 40
 
